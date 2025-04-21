@@ -1,7 +1,11 @@
-import CommonHeader from "../../components/common/header/CommonHeader"
-import styles from "./styles/index.module.scss"
-import CommonSearchBar from "../../components/common/searchBar/CommonSearchBar"
-import CommonNav from "../../components/common/navigation/CommonNav"
+import CommonHeader from "../../components/common/header/CommonHeader";
+import CommonSearchBar from "../../components/common/searchBar/CommonSearchBar";
+import CommonNav from "../../components/common/navigation/CommonNav";
+import CommonFooter from "../../components/common/footer/CommonFooter";
+import Card from "./components/Card";
+
+//CSS
+import styles from "./styles/index.module.scss";
 
 function index() {
   return (
@@ -17,19 +21,24 @@ function index() {
           <div className={styles.wrapper}>
             <span className={styles.wrapper_title}>PhotoSplash</span>
             <span className={styles.wrapper_desc}>
-              인터넷의 시각 자료 출처입니다. <br/> 
+              인터넷의 시각 자료 출처입니다. <br />
               모든 지역에 있는 크리에이터들의 지원을 받습니다.
             </span>
-            {/* 검색창 UI 부분 */}      
+            {/* 검색창 UI 부분 */}
             <CommonSearchBar />
-
           </div>
         </div>
-        <div className={styles.page_contents_imageBox}></div>
+        <div className={styles.page_contents_imageBox}>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
       </div>
       {/* 공통 푸터 UI 부분 */}
+      <CommonFooter />
     </div>
-  )
+  );
 }
 
-export default index
+export default index;

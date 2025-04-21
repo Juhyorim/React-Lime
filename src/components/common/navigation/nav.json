@@ -51,35 +51,35 @@
   {
     "index": 7,
     "path": "/texture",
-    "label": "텍스처 및 패턴",
+    "label": "인테리어",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 8,
     "path": "/texture",
-    "label": "텍스처 및 패턴",
+    "label": "필름",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 9,
     "path": "/texture",
-    "label": "텍스처 및 패턴",
+    "label": "실험적인",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 10,
     "path": "/texture",
-    "label": "텍스처 및 패턴",
+    "label": "여행",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 11,
     "path": "/texture",
-    "label": "텍스처 및 패턴",
+    "label": "스포츠",
     "searchValue": "texture",
     "isActive": false
   }
