@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { imageData } from "../../recoil/selectors/imageSelector";
 import CommonHeader from "../../components/common/header/CommonHeader";
 import CommonSearchBar from "../../components/common/searchBar/CommonSearchBar";
 import CommonNav from "../../components/common/navigation/CommonNav";
@@ -7,43 +10,14 @@ import { CardDTO } from "./types/card";
 
 //CSS
 import styles from "./styles/index.module.scss";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
 function index() {
-  const [imgUrls, setImgUrls] = useState([]);
+  const imgSelector = useRecoilValue(imageData);
+  const [imgData, setImgData] = useState<CardDTO[]>([]);
 
-  const getData = async () => {
-    //오픈 API 호출
-    const API_URL = "https://api.unsplash.com/search/photos";
-    const API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY;
-    const PER_PAGE = 30; //보여줄 이미지 개수
-
-    const searchValue = "Korea";
-    const pageValue = 100;
-
-    try {
-      const res = await axios.get(
-        `${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`
-      );
-
-      console.log(res);
-
-      if (res.status === 200) {
-        setImgUrls(res.data.results);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const cardList = imgUrls.map((card: CardDTO) => {
-    return <Card data={card} key={card.id} />;
+  const CARD_LIST = imgSelector.data.results.map((card: CardDTO) => {
+    return <Card data={card} key={card.id} />; //키는 고유한 값을 사용하자
   });
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   return (
     <div className={styles.page}>
@@ -65,7 +39,7 @@ function index() {
             <CommonSearchBar />
           </div>
         </div>
-        <div className={styles.page_contents_imageBox}>{cardList}</div>
+        <div className={styles.page_contents_imageBox}>{CARD_LIST}</div>
       </div>
       {/* 공통 푸터 UI 부분 */}
       <CommonFooter />
