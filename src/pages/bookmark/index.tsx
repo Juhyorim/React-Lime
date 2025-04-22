@@ -26,10 +26,16 @@ function index() {
       {/* <div> */}
       <CommonHeader />
       <main className={styles.page__contents}>
-        {/* <main> */}
-        {data.map((item: CardDTO) => {
-          return <Card prop={item} key={item.id} />;
-        })}
+        {/* 만약 데이터가 없을 때 */}
+        {data.length === 0 ? (
+          <div className={styles.page__contents__noData}>
+            조회 가능한 데이터가 없습니다.
+          </div>
+        ) : (
+          data.map((item: CardDTO) => {
+            return <Card prop={item} key={item.id} />;
+          })
+        )}
       </main>
     </div>
   );

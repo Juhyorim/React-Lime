@@ -17,6 +17,7 @@ function DetailDialog({ data, handleDialog }: Props) {
   //다이얼로그 끄기
   const closeDialog = () => {
     handleDialog(false);
+    // event.stopPropagation(); //@TODO 외부영역 눌렀을 때만 이벤트 동작하도록 수정하자
   };
 
   //북마크 추가 이벤트
@@ -58,9 +59,25 @@ function DetailDialog({ data, handleDialog }: Props) {
     ) {
       setBookmark(true);
     }
+
+    //ESC 키를 눌렀을 때, 다이얼로그 창 닫기
+    const escKeyDownCloseDialog = (event: any) => {
+      console.log("함수 호출");
+      if (event.key === "Escape") {
+        closeDialog();
+      }
+    };
+
+    //위에 만들어놓은 escKeyDialog 키다운 했을 때, 이벤트로 등록 및 해지
+    // window.addEventListener("keydown", escKeyDownCloseDialog);
+    document.addEventListener("keydown", escKeyDownCloseDialog);
+
+    // return () => window.removeEventListener("keydown", escKeyDownCloseDialog);
+    return () => document.removeEventListener("keydown", escKeyDownCloseDialog);
   }, []);
 
   return (
+    // <div className={styles.container} onClick={closeDialog}>
     <div className={styles.container}>
       <div className={styles.container__dialog}>
         <div className={styles.container__dialog__header}>

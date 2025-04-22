@@ -5,13 +5,20 @@ function CommonHeader() {
   //북마크 페이지로 이동
   const navigate = useNavigate();
 
-  const moveToPage = () => {
-    navigate("/bookmark");
+  const moveToPage = (filter: string) => {
+    if (filter === "main") {
+      navigate("/");
+      return;
+    }
+
+    if (filter === "bookmark") {
+      navigate("/bookmark");
+    }
   };
 
   return (
     <header className={styles.header}>
-      <div className={styles.header_logoBox}>
+      <div className={styles.header_logoBox} onClick={() => moveToPage("main")}>
         <img
           src="src/assets/images/image-logo.png"
           alt=""
@@ -23,7 +30,7 @@ function CommonHeader() {
         <button className={styles.header_profileBox_button}>사진제출</button>
         <button
           className={styles.header_profileBox_button}
-          onClick={moveToPage}
+          onClick={() => moveToPage("bookmark")}
         >
           북마크
         </button>
