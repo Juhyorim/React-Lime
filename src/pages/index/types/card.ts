@@ -14,7 +14,7 @@ export interface CardDTO {
   promoted_at?: string;
   slug: string;
   sponsorship?: string;
-  tags: Tag[];
+  // tags: Tag[];
   topic_submissions: any;
   updated_at: string;
   urls: Url;
@@ -29,19 +29,20 @@ interface Link {
   self: string;
 }
 
-export interface Tag {
-  source: {
-    ancestry: any;
-    cover_photo: any;
-    description: string;
-    meta_description: string;
-    meta_title: string;
-    subtitle: string;
-    title: string;
-  };
-  title: string;
-  type: string;
-}
+//없어짐 API에
+// export interface Tag {
+//   source: {
+//     ancestry: any;
+//     cover_photo: any;
+//     description: string;
+//     meta_description: string;
+//     meta_title: string;
+//     subtitle: string;
+//     title: string;
+//   };
+//   title: string;
+//   type: string;
+// }
 
 interface Url {
   full: string;
