@@ -9,6 +9,7 @@ function CommonSearchBar() {
   const [page, setPage] = useRecoilState(pageState);
   const [text, setText] = useState("");
   const onChange = (event: any) => {
+    //@TODO event 타입 결정하기
     setText(event.target.value);
   };
 

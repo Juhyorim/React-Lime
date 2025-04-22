@@ -64,8 +64,8 @@ function CommonFooter() {
         {/*변경될 UI 부분*/}
 
         {res[step] &&
-          res[step].map((page: number, index: number) => {
-            if (page < 11) {
+          res[step].map((item: number, index: number) => {
+            if (item < 11) {
               return (
                 <button
                   className={
@@ -73,12 +73,12 @@ function CommonFooter() {
                       ? `${styles.pagination__button} ${styles.active}`
                       : `${styles.pagination__button} ${styles.inactive}`
                   }
-                  key={page}
+                  key={item}
                   onClick={() => {
-                    moveToPage(page);
+                    moveToPage(item);
                   }}
                 >
-                  {page}
+                  {item}
                 </button>
               );
             } else {
@@ -89,12 +89,12 @@ function CommonFooter() {
                       ? `${styles.pagination__button} ${styles.active}`
                       : `${styles.pagination__button} ${styles.inactive}`
                   }
-                  key={page}
+                  key={item}
                   onClick={() => {
-                    moveToPage(page);
+                    moveToPage(item);
                   }}
                 >
-                  {page}
+                  {item}
                 </button>
               );
             }
