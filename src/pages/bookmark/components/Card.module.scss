@@ -55,7 +55,15 @@
       }
 
       .value {
+        width: 112px;
+
         color: $color-gray-500;
+
+        //긴 글 ...처리
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
       }
     }
   }
