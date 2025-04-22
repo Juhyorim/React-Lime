@@ -11,6 +11,7 @@ import DetailDialog from "../../components/common/dialog/DetailDialog";
 
 //CSS
 import styles from "./styles/index.module.scss";
+import Loading from "./components/Loading";
 
 function index() {
   // const imgSelector = useRecoilValue(imageData); //바인딩 전에 호출
@@ -45,7 +46,7 @@ function index() {
       return result;
     } else {
       //loading일 때
-      return <div>loading...</div>;
+      return <Loading />;
     }
   }, [imgSelector]);
 
