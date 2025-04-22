@@ -21,7 +21,7 @@ export const imageData = selector({
       );
       console.log(res);
 
-      return res;
+      return res.data.results;
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,9 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import MainPage from "@pages/index/index";
+
+// import MainPage from "@pages/index/index";
+const MainPage = React.lazy(() => import("@pages/index/index"));
 
 function App() {
   return (
@@ -8,6 +11,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index path="/" element={<MainPage />}></Route>
+          <Route path="/:id" element={<MainPage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

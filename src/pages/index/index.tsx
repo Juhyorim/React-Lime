@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useMemo, useState } from "react";
+import { useRecoilValueLoadable } from "recoil";
 import { imageData } from "../../recoil/selectors/imageSelector";
 import CommonHeader from "../../components/common/header/CommonHeader";
 import CommonSearchBar from "../../components/common/searchBar/CommonSearchBar";
@@ -13,20 +13,43 @@ import DetailDialog from "../../components/common/dialog/DetailDialog";
 import styles from "./styles/index.module.scss";
 
 function index() {
-  const imgSelector = useRecoilValue(imageData);
+  // const imgSelector = useRecoilValue(imageData); //바인딩 전에 호출
+  const imgSelector = useRecoilValueLoadable(imageData);
   const [imgData, setImgData] = useState<CardDTO>();
   const [open, setOpen] = useState<boolean>(false); // 이미지 상세 다이얼로그 발생 및 관리 state
 
-  const CARD_LIST = imgSelector.data.results.map((card: CardDTO) => {
-    return (
-      <Card
-        data={card}
-        key={card.id}
-        handleDialog={setOpen}
-        handleSetData={setImgData}
-      />
-    ); //키는 고유한 값을 사용하자
-  });
+  // const CARD_LIST = imgSelector.data.results.map((card: CardDTO) => {
+  //   return (
+  //     <Card
+  //       data={card}
+  //       key={card.id}
+  //       handleDialog={setOpen}
+  //       handleSetData={setImgData}
+  //     />
+  //   ); //키는 고유한 값을 사용하자
+  // });
+
+  const CARD_LIST = useMemo(() => {
+    console.log(imgSelector);
+
+    if (imgSelector.state === "hasValue") {
+      const result = imgSelector.contents.map((card: CardDTO) => {
+        return (
+          <Card
+            data={card}
+            key={card.id}
+            handleDialog={setOpen}
+            handleSetData={setImgData}
+          />
+        );
+      });
+
+      return result;
+    } else {
+      //loading일 때
+      return <div>loading...</div>;
+    }
+  }, [imgSelector]);
 
   return (
     <div className={styles.page}>
