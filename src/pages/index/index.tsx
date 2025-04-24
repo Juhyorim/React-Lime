@@ -75,7 +75,11 @@ function index() {
       {/* 공통 푸터 UI 부분 */}
       <CommonFooter />
 
-      {open && <DetailDialog data={imgData} handleDialog={setOpen} />}
+      {open && imgData && (
+        <DetailDialog data={imgData} handleDialog={setOpen} />
+      )}
+
+      {/* {open && <DetailDialog data={imgData} handleDialog={setOpen} />} */}
     </div>
   );
 }

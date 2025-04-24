@@ -23,7 +23,10 @@ function DetailDialog({ data, handleDialog }: Props) {
   //북마크 추가 이벤트
   const addBookmark = (selected: CardDTO) => {
     setBookmark(true);
-    const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
+
+    // const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
+    const bookmarkData = localStorage.getItem("bookmark");
+    const getLocalStorage = bookmarkData ? JSON.parse(bookmarkData) : null;
 
     if (!getLocalStorage || getLocalStorage === null) {
       // 1. 로컬스토리지에 bookmark 라는 데이터가 없을 경우
@@ -50,7 +53,9 @@ function DetailDialog({ data, handleDialog }: Props) {
   };
 
   useEffect(() => {
-    const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
+    // const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
+    const bookmarkData = localStorage.getItem("bookmark");
+    const getLocalStorage = bookmarkData ? JSON.parse(bookmarkData) : null;
 
     //@TODO 상당히 비효율적인데 데이터베이스로 바꾸자
     if (

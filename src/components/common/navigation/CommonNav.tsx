@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./CommonNav.module.scss";
 import { Link, useLocation } from "react-router-dom";
 import navJson from "./nav.json";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { searchState } from "../../../recoil/atoms/searchState";
 import { pageState } from "../../../recoil/atoms/pageState";
 
@@ -18,6 +18,7 @@ function CommonNav() {
   const location = useLocation();
   //카테고리 직접 만듦 - 백엔드에서 주는 형태가 더 좋을듯
   const [navigation, setNavigation] = useState<Navigation[]>(navJson);
+
   const [page, setPage] = useRecoilState(pageState);
   const [search, setSearch] = useRecoilState(searchState);
 
@@ -32,6 +33,8 @@ function CommonNav() {
         nav.isActive = true;
         setSearch(nav.searchValue);
         setPage(1);
+        console.log("Current page:", page);
+        console.log("Current search:", search);
       }
     });
 

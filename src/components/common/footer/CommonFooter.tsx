@@ -25,7 +25,7 @@ function CommonFooter() {
   const length = newArr.length;
   const divide =
     Math.floor(length / 10) + (Math.floor(length % 10) > 0 ? 1 : 0);
-  const res = [];
+  const res: Array<any> = [];
 
   for (let i = 0; i <= divide; i++) {
     res.push(newArr.splice(0, 10));

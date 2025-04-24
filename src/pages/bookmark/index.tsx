@@ -7,7 +7,9 @@ import { CardDTO } from "../index/types/card";
 function index() {
   const [data, setData] = useState([]);
   const getData = () => {
-    const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
+    // const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
+    const bookmarkData = localStorage.getItem("bookmark");
+    const getLocalStorage = bookmarkData ? JSON.parse(bookmarkData) : null;
 
     if (getLocalStorage || getLocalStorage !== null) {
       setData(getLocalStorage);

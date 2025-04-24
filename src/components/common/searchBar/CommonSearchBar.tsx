@@ -21,6 +21,8 @@ function CommonSearchBar() {
     }
 
     setPage(1);
+    console.log("Current page:", page);
+    console.log("Current search:", search);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
