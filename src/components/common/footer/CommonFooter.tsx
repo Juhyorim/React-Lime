@@ -56,7 +56,7 @@ function CommonFooter() {
       <div className={styles.pagination}>
         <button className={styles.pagination__button}>
           <img
-            src="src/assets/icons/icon-arrowLeft.svg"
+            src="/assets/icons/icon-arrowLeft.svg"
             alt=""
             onClick={moveToPrev}
           />
@@ -103,7 +103,7 @@ function CommonFooter() {
         {/* <span>1</span> */}
         <button className={styles.pagination__button}>
           <img
-            src="src/assets/icons/icon-arrowRight.svg"
+            src="/assets/icons/icon-arrowRight.svg"
             alt=""
             onClick={moveToNext}
           />
