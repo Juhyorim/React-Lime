@@ -20,7 +20,7 @@ function CommonHeader() {
     <header className={styles.header}>
       <div className={styles.header_logoBox} onClick={() => moveToPage("main")}>
         <img
-          src="/assets/images/image-logo.png"
+          src={`${import.meta.env.PUBLIC_URL}/assets/images/image-logo.png`}
           alt=""
           className={styles.header_logoBox_logo}
         />
