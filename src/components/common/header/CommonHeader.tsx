@@ -14,6 +14,10 @@ function CommonHeader() {
     if (filter === "bookmark") {
       navigate("/bookmark");
     }
+
+    if (filter === "reactprac") {
+      navigate("/reactprac");
+    }
   };
 
   return (
@@ -27,6 +31,12 @@ function CommonHeader() {
         <span className={styles.header_logoBox_title}>PhotoSplash</span>
       </div>
       <div className={styles.header_profileBox}>
+        <button
+          className={styles.header_profileBox_button}
+          onClick={() => moveToPage("reactprac")}
+        >
+          효림 연습장
+        </button>
         <button className={styles.header_profileBox_button}>사진제출</button>
         <button
           className={styles.header_profileBox_button}
