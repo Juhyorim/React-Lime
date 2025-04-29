@@ -17,6 +17,13 @@
 
     width: 100%;
 
+    &__title {
+      font-weight: 700;
+      font-size: 2rem;
+      background-color: $color-gray-200;
+      width: 100%;
+    }
+
     &__clock {
       display: flex;
       flex-direction: row;

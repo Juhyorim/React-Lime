@@ -3,6 +3,7 @@ import CommonHeader from "@/components/common/header/CommonHeader";
 import CommonNav from "@/components/common/navigation/CommonNav";
 import UseStatePrac from "./components/UseStatePrac";
 import UseEffectPrac from "./components/UseEffectPrac";
+import UseRefPrac from "./components/UseRefPrac";
 
 function App() {
   return (
@@ -14,11 +15,14 @@ function App() {
       <CommonNav />
 
       <div className={styles.page__contents}>
-        <p>useEffect 예시</p>
+        <p className={styles.page__contents__title}>useEffect 예시</p>
         <UseEffectPrac />
 
-        <p>useState 예시</p>
+        <p className={styles.page__contents__title}>useState 예시</p>
         <UseStatePrac />
+
+        <p className={styles.page__contents__title}>useRef 예시</p>
+        <UseRefPrac />
       </div>
     </div>
   );
