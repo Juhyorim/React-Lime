@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./CommonHeader.module.scss";
+import { useState } from "react";
 
 function CommonHeader() {
   //북마크 페이지로 이동
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
 
   const moveToPage = (filter: string) => {
     if (filter === "main") {
@@ -17,6 +19,10 @@ function CommonHeader() {
 
     if (filter === "reactprac") {
       navigate("/reactprac");
+    }
+
+    if (filter === "login") {
+      navigate("/login");
     }
   };
 
@@ -44,9 +50,18 @@ function CommonHeader() {
         >
           북마크
         </button>
-        <button className={styles.header_profileBox_userName}>
-          lime | lime@naver.com
-        </button>
+        {isLogin ? (
+          <button className={styles.header_profileBox_userName}>
+            lime | lime@naver.com
+          </button>
+        ) : (
+          <button
+            className={styles.header_profileBox_button}
+            onClick={() => moveToPage("login")}
+          >
+            로그인
+          </button>
+        )}
       </div>
     </header>
   );
