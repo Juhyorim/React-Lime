@@ -51,7 +51,8 @@ function CommonNav() {
             ? `${styles.navigation_menu}} ${styles.active}`
             : `${styles.navigation_menu} ${styles.inactive}`
         }
-        key={item.path}
+        key={`${item.path}-${item.index}`}
+        // key={item.path}
       >
         <span className={styles.navigation__menu__label}>{item.label}</span>
       </Link>
