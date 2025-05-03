@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./styles/index.module.scss";
 import { ThemeContext } from "./context/ThemeContext";
 import FlowerBlock from "./components/FlowerBlock";

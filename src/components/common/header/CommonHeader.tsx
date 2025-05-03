@@ -5,7 +5,7 @@ import { useState } from "react";
 function CommonHeader() {
   //북마크 페이지로 이동
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin] = useState(false);
 
   const moveToPage = (filter: string) => {
     if (filter === "main") {

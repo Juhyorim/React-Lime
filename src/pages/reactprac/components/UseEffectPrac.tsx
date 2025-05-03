@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./UseEffectPrac.module.scss";
 import Timer from "./Timer";
+import { useRecoilValueLoadable } from "recoil";
+import { locationData } from "@/recoil/selectors/locationSelector";
+import Loading from "@/pages/index/components/Loading";
 
 function UseEffectPrac() {
   const [name2, setName2] = useState("");
@@ -9,10 +12,7 @@ function UseEffectPrac() {
 
   const [showTimer, setShowTImer] = useState(false);
 
-  // 화면 랜더링 될 때마다 실행
-  // useEffect(() => {
-  //   console.log("랜더링!!");
-  // });
+  const locationSelector = useRecoilValueLoadable(locationData);
 
   //count2가 변화될 때 호출됨
   useEffect(() => {
@@ -26,6 +26,15 @@ function UseEffectPrac() {
   const handleCount2 = () => {
     setCount2(count2 + 1);
   };
+
+  const dataBlock = useMemo(() => {
+    if (locationSelector.state === "hasValue") {
+      return <div>{locationSelector.contents}</div>;
+    } else {
+      //loading일 때
+      return <Loading />;
+    }
+  }, [locationSelector]);
 
   return (
     <div className={styles.page}>
@@ -45,6 +54,7 @@ function UseEffectPrac() {
         <input type="text" value={name2} onChange={handleInput2Change} />
         <span>name = {name2}</span>
       </div>
+      <div className={styles.page__inputBox}>{dataBlock}</div>
     </div>
   );
 }
