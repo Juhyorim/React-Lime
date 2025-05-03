@@ -1,6 +1,6 @@
-@import "./color.scss";
+@forward "./color.scss";
 // @use "./color.scss" as color;
-@import "./font.scss";
+@forward "./font.scss";
 
 * {
   padding: 0;
