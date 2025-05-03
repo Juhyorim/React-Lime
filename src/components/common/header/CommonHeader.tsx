@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./CommonHeader.module.scss";
-import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { userInfoAtom } from "@/recoil/atoms/userInfoAtom";
 
 function CommonHeader() {
   //북마크 페이지로 이동
   const navigate = useNavigate();
-  const [isLogin] = useState(false);
+  const [userInfo] = useRecoilState(userInfoAtom);
 
   const moveToPage = (filter: string) => {
     if (filter === "main") {
@@ -50,9 +51,9 @@ function CommonHeader() {
         >
           북마크
         </button>
-        {isLogin ? (
-          <button className={styles.header_profileBox_userName}>
-            lime | lime@naver.com
+        {userInfo.token !== "" ? (
+          <button className={styles.header_profileBox_button}>
+            {userInfo.nickname} | {userInfo.email}
           </button>
         ) : (
           <button
