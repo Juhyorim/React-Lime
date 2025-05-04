@@ -3,7 +3,7 @@ import styles from "./UseEffectPrac.module.scss";
 import Timer from "./Timer";
 import { useRecoilValueLoadable } from "recoil";
 import { locationData } from "@/recoil/selectors/locationSelector";
-import Loading from "@/pages/index/components/Loading";
+import Loading from "@/pages/imageSplash/components/Loading";
 
 function UseEffectPrac() {
   const [name2, setName2] = useState("");

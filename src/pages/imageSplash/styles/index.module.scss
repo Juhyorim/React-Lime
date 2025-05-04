@@ -11,46 +11,59 @@ $NAVIGATION-HEIGHT: 50px;
   width: 100%;
   height: 100vh;
 
-  &__btns {
+  &_contents {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 
     width: 100%;
+    height: calc(100% - $HEADER-HEIGHT - $FOOTER-HEIGHT - $NAVIGATION-HEIGHT);
 
-    &__photo {
+    &_introBox {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 5px;
-      margin: 5px;
 
-      width: 400px;
-      height: 100%;
+      width: 100%;
+      height: 40%;
 
       background-image: url("/assets/images/image-intro.png");
       background-size: cover;
       background-position: 100% 15%;
-      font-weight: 700;
-      color: black;
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+
+        &_title {
+          margin-bottom: 4px;
+
+          color: $color-white-000;
+          font-size: 3rem;
+          font-weight: 700;
+        }
+
+        &_desc {
+          color: $color-white-000;
+          margin-bottom: 32px;
+        }
+      }
     }
 
-    &__tico {
+    &_imageBox {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 5px;
-      margin: 5px;
 
-      width: 400px;
-      height: 100%;
+      width: 100%;
+      height: 60%;
+      flex-wrap: wrap;
 
-      background-image: url("/assets/images/image-tico.png");
-      background-size: cover;
-      background-position: 100% 15%;
-      font-weight: 700;
-      color: black;
+      padding: 16px 60px;
+
+      gap: 16px;
+      overflow-y: scroll;
     }
   }
 }

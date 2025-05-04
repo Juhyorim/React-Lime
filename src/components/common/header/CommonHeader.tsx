@@ -35,16 +35,15 @@ function CommonHeader() {
           alt=""
           className={styles.header_logoBox_logo}
         />
-        <span className={styles.header_logoBox_title}>PhotoSplash</span>
+        <span className={styles.header_logoBox_title}>Lime Project</span>
       </div>
       <div className={styles.header_profileBox}>
         <button
           className={styles.header_profileBox_button}
           onClick={() => moveToPage("reactprac")}
         >
-          효림 연습장
+          리액트 연습장
         </button>
-        <button className={styles.header_profileBox_button}>사진제출</button>
         <button
           className={styles.header_profileBox_button}
           onClick={() => moveToPage("bookmark")}
