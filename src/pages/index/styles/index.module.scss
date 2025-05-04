@@ -25,9 +25,19 @@ $NAVIGATION-HEIGHT: 50px;
       justify-content: center;
       padding: 5px;
       margin: 5px;
+      cursor: pointer;
 
-      width: 400px;
-      height: 100%;
+      @media (min-width: 410px) {
+        width: 400px;
+        height: 150px;
+        font-size: large;
+      }
+
+      @media not all and (min-width: 410px) {
+        width: 300px;
+        height: 100px;
+        font-size: medium;
+      }
 
       background-image: url("/assets/images/image-intro.png");
       background-size: cover;
@@ -42,9 +52,19 @@ $NAVIGATION-HEIGHT: 50px;
       justify-content: center;
       padding: 5px;
       margin: 5px;
+      cursor: pointer;
 
-      width: 400px;
-      height: 100%;
+      @media (min-width: 410px) {
+        width: 400px;
+        height: 150px;
+        font-size: large;
+      }
+
+      @media not all and (min-width: 410px) {
+        width: 300px;
+        height: 100px;
+        font-size: medium;
+      }
 
       background-image: url("/assets/images/image-tico.png");
       background-size: cover;
