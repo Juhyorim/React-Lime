@@ -181,7 +181,7 @@ const PriorityChart: React.FC = () => {
           <ZAxis dataKey="z" range={[30, 200]} name="우선순위" />
           <Tooltip content={<CustomTooltip />} />
           <Scatter name="우선순위" data={data} shape="circle">
-            {data.map((entry, index) => (
+            {data.map((_, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={"rgb(255, 80, 255)"}
