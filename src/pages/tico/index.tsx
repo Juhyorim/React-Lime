@@ -5,8 +5,11 @@ import { SubscribeDTO } from "./types/subscribe";
 import { useState } from "react";
 import RegionDialog from "@/components/common/dialog/RegionDialog";
 import { CityInfo } from "./cities";
+import { useNavigate } from "react-router-dom";
 
 function index() {
+  const navigate = useNavigate();
+
   // const subscribeInfoStub: SubscribeDTO[] = [];
   const subscribeInfoStub: SubscribeDTO[] = [
     {
@@ -41,6 +44,11 @@ function index() {
     cityName: "세종특별시",
   }); //default 값 설정
 
+  const handleSubscribeClick = (subscribeId: number) => {
+    console.log(subscribeId);
+    navigate("/chart");
+  };
+
   return (
     <div className={styles.tico}>
       {/* 헤더 UI 부분 */}
@@ -57,7 +65,13 @@ function index() {
           {subscribeInfoStub.length !== 0 ? (
             <div className={styles.subscribeList}>
               {subscribeInfoStub.map((item: SubscribeDTO) => {
-                return <BriefSubscribe prop={item} key={item.subscribeId} />;
+                return (
+                  <BriefSubscribe
+                    prop={item}
+                    key={item.subscribeId}
+                    onClick={() => handleSubscribeClick(item.subscribeId)}
+                  />
+                );
               })}
             </div>
           ) : (
