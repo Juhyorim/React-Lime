@@ -2,10 +2,12 @@ import TicoHeader from "@/components/common/header/TicoHeader";
 import styles from "./styles/index.module.scss";
 import BriefSubscribe from "./components/BriefSubscribe";
 import { SubscribeDTO } from "./types/subscribe";
+import { useState } from "react";
+import RegionDialog from "@/components/common/dialog/RegionDialog";
+import { CityInfo } from "./cities";
 
 function index() {
   // const subscribeInfoStub: SubscribeDTO[] = [];
-
   const subscribeInfoStub: SubscribeDTO[] = [
     {
       subscribeId: 1,
@@ -33,10 +35,19 @@ function index() {
     },
   ];
 
+  const [regionOpen, setRegionOpen] = useState<boolean>(false);
+  const [region, setRegion] = useState<CityInfo>({
+    cityCode: 12,
+    cityName: "세종특별시",
+  }); //default 값 설정
+
   return (
     <div className={styles.tico}>
       {/* 헤더 UI 부분 */}
-      <TicoHeader />
+      <TicoHeader
+        handleRegionDialog={setRegionOpen}
+        regionName={region.cityName}
+      />
 
       <div className={styles.tico_body}>
         <div className={styles.tico_body_pad} />
@@ -58,6 +69,10 @@ function index() {
 
         <div className={styles.tico_body_pad} />
       </div>
+
+      {regionOpen && (
+        <RegionDialog handleDialog={setRegionOpen} handleRegion={setRegion} />
+      )}
     </div>
   );
 }

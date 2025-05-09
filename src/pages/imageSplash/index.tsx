@@ -7,7 +7,6 @@ import CommonNav from "../../components/common/navigation/CommonNav";
 import CommonFooter from "../../components/common/footer/CommonFooter";
 import DetailDialog from "../../components/common/dialog/DetailDialog";
 
-//CSS
 import styles from "./styles/index.module.scss";
 import { CardDTO } from "../index/types/card";
 import Card from "./components/Card";

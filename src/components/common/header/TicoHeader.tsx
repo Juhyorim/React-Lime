@@ -1,7 +1,12 @@
 import styles from "./TicoHeader.module.scss";
 import { useNavigate } from "react-router-dom";
 
-function TicoHeader() {
+interface Props {
+  handleRegionDialog: (eventValue: boolean) => void;
+  regionName: string;
+}
+
+function TicoHeader({ handleRegionDialog, regionName }: Props) {
   const navigate = useNavigate();
 
   const moveToPage = (filter: string) => {
@@ -9,6 +14,10 @@ function TicoHeader() {
       navigate("/tico");
       return;
     }
+  };
+
+  const openDialog = () => {
+    handleRegionDialog(true);
   };
 
   return (
@@ -22,7 +31,9 @@ function TicoHeader() {
         <span className={styles.header_logoBox_title}>Tico</span>
       </div>
       <div className={styles.header_search}>
-        <button className={styles.header_search_button}>서울</button>
+        <button className={styles.header_search_button} onClick={openDialog}>
+          {regionName}
+        </button>
         <input
           className={styles.header_search_input}
           placeholder="버스, 정류장, 장소 검색"
