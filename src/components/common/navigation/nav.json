@@ -1,84 +1,84 @@
 [
   {
     "index": 0,
-    "path": "/search/edit",
+    "path": "/imageSplash/search/edit",
     "label": "보도/편집 전용",
     "searchValue": "edit",
     "isActive": false
   },
   {
     "index": 1,
-    "path": "/search/following",
+    "path": "/imageSplash/search/following",
     "label": "팔로잉",
     "searchValue": "following",
     "isActive": false
   },
   {
     "index": 2,
-    "path": "/search/photoPlus",
+    "path": "/imageSplash/search/photoPlus",
     "label": "Unsplash Photo+",
     "searchValue": "photo",
     "isActive": false
   },
   {
     "index": 3,
-    "path": "/search/oneColor",
+    "path": "/imageSplash/search/oneColor",
     "label": "단색",
     "searchValue": "one color",
     "isActive": false
   },
   {
     "index": 4,
-    "path": "/search/3dRender",
+    "path": "/imageSplash/search/3dRender",
     "label": "3D 랜더링",
     "searchValue": "3d rendering",
     "isActive": false
   },
   {
     "index": 5,
-    "path": "/search/nature",
+    "path": "/imageSplash/search/nature",
     "label": "자연",
     "searchValue": "nature",
     "isActive": false
   },
   {
     "index": 6,
-    "path": "/search/texture",
+    "path": "/imageSplash/search/texture",
     "label": "텍스처 및 패턴",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 7,
-    "path": "/search/texture",
+    "path": "/imageSplash/search/texture",
     "label": "인테리어",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 8,
-    "path": "/search/texture",
+    "path": "/imageSplash/search/texture",
     "label": "필름",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 9,
-    "path": "/search/texture",
+    "path": "/imageSplash/search/texture",
     "label": "실험적인",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 10,
-    "path": "/search/texture",
+    "path": "/imageSplash/search/texture",
     "label": "여행",
     "searchValue": "texture",
     "isActive": false
   },
   {
     "index": 11,
-    "path": "/search/texture",
+    "path": "/imageSplash/search/texture",
     "label": "스포츠",
     "searchValue": "texture",
     "isActive": false

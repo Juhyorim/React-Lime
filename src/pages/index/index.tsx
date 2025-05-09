@@ -10,6 +10,11 @@ function index() {
     return;
   };
 
+  const gotoTicoPage = () => {
+    navigate("/tico");
+    return;
+  };
+
   return (
     <div className={styles.page}>
       {/* 공통 헤더 UI 부분 */}
@@ -22,10 +27,7 @@ function index() {
         >
           포토스플래시 바로가기
         </button>
-        <button
-          className={styles.page__btns__tico}
-          onClick={gotoImageSplashPage}
-        >
+        <button className={styles.page__btns__tico} onClick={gotoTicoPage}>
           버스정보시스템 바로가기
         </button>
       </div>
