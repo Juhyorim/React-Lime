@@ -3,7 +3,7 @@ import styles from "./styles/index.module.scss";
 import { ThemeContext } from "./context/ThemeContext";
 import FlowerBlock from "./components/FlowerBlock";
 import { UserContext } from "./context/UserContext";
-import axios from "axios";
+// import axios from "axios";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userInfoAtom } from "@/recoil/atoms/userInfoAtom";
@@ -30,33 +30,52 @@ function index() {
 
   const login = async () => {
     if (inputRef.current && passwordInputRef.current) {
-      await axios
-        .post(`http://localhost:8080/api/v1/login`, {
-          username: inputRef.current.value,
-          password: passwordInputRef.current.value,
-        })
-        .then((response) => {
-          console.log(response);
-          console.log(response.data);
+      // await axios
+      //   .post(`http://localhost:8080/api/v1/login`, {
+      //     username: inputRef.current.value,
+      //     password: passwordInputRef.current.value,
+      //   })
+      //   .then((response) => {
+      //     console.log(response);
+      //     console.log(response.data);
 
-          if (response.status === 200) {
-            console.log("로그인 성공");
-          }
+      //     if (response.status === 200) {
+      //       console.log("로그인 성공");
+      //     }
 
-          setUserInfo({
-            username: response.data.username,
-            email: response.data.email,
-            nickname: response.data.nickname,
-            token: response.data.token,
-          });
+      //     setUserInfo({
+      //       username: response.data.username,
+      //       email: response.data.email,
+      //       nickname: response.data.nickname,
+      //       token: response.data.token,
+      //     });
 
-          alert(`환영합니다. ${response.data.nickname}`);
+      //     alert(`환영합니다. ${response.data.nickname}`);
 
-          navigate("/");
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
+      //     navigate("/");
+      //   })
+      //   .catch((error) => {
+      //     console.log(error.response);
+      //   });
+
+      const userStub = {
+        username: "asdf",
+        nickname: "asdf",
+        email: "asdf",
+        token:
+          "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RmIiwiaWF0IjoxNzQ2ODA0OTM1LCJleHAiOjE3NDY4MTY5MzUsInRva2VuX3R5cGUiOiJhY2Nlc3MifQ.J2Zl_Pv9Srxe_7I16uqOGMsuyGN1a98r_940unsqvHg",
+      };
+
+      setUserInfo({
+        username: userStub.username,
+        email: userStub.email,
+        nickname: userStub.nickname,
+        token: userStub.token,
+      });
+
+      alert(`환영합니다. ${userStub.nickname}`);
+
+      navigate("/");
 
       inputRef.current.focus();
     } else {

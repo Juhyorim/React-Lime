@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useState, useEffect } from "react";
 import {
   ScatterChart,
@@ -34,20 +34,73 @@ interface ResponseItem {
   remainTime: number;
 }
 
-const getData = async () => {
-  const response = await axios.get(
-    `http://localhost:8080/api/v1/subscribe/busInfo?subscriptionId=152`,
+const getData = () => {
+  // const response = await axios.get(
+  //   `http://localhost:8080/api/v1/subscribe/busInfo?subscriptionId=152`,
+  //   {
+  //     headers: {
+  //       Authorization:
+  //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RmIiwiaWF0IjoxNzQ2ODA0ODA3LCJleHAiOjE3NDY4MTY4MDcsInRva2VuX3R5cGUiOiJhY2Nlc3MifQ.NicONHRE7HNMxuAzhukxjUowVTHFgAMHaddGgg-n490",
+  //     },
+  //   }
+  // );
+
+  // console.log(response.data);
+
+  return [
     {
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RmIiwiaWF0IjoxNzQ2NDMxODA4LCJleHAiOjE3NDY0NDM4MDgsInRva2VuX3R5cGUiOiJhY2Nlc3MifQ.047J-Av81LrikpZTgL_fpjwvPyyeH36pDvMx1WdmpyA",
-      },
-    }
-  );
-
-  console.log(response.data);
-
-  return response.data.response; // 응답에서 데이터 추출
+      arriveTime: "2025-05-05T19:13:42.744356",
+      remainTime: 296,
+    },
+    {
+      arriveTime: "2025-05-05T19:14:04.512089",
+      remainTime: 296,
+    },
+    {
+      arriveTime: "2025-05-05T19:13:34.805847",
+      remainTime: 175,
+    },
+    {
+      arriveTime: "2025-05-05T19:14:01.505894",
+      remainTime: 175,
+    },
+    {
+      arriveTime: "2025-05-05T19:12:58.884371",
+      remainTime: 22,
+    },
+    {
+      arriveTime: "2025-05-05T20:11:13.133401",
+      remainTime: 638,
+    },
+    {
+      arriveTime: "2025-05-05T20:12:56.733339",
+      remainTime: 638,
+    },
+    {
+      arriveTime: "2025-05-05T20:17:26.001361",
+      remainTime: 817,
+    },
+    {
+      arriveTime: "2025-05-05T20:18:56.281028",
+      remainTime: 817,
+    },
+    {
+      arriveTime: "2025-05-05T20:20:26.507285",
+      remainTime: 817,
+    },
+    {
+      arriveTime: "2025-05-05T20:21:56.755245",
+      remainTime: 817,
+    },
+    {
+      arriveTime: "2025-05-05T20:23:26.978626",
+      remainTime: 817,
+    },
+    {
+      arriveTime: "2025-05-05T20:24:57.240325",
+      remainTime: 817,
+    },
+  ];
 };
 
 const PriorityChart: React.FC = () => {
@@ -61,7 +114,7 @@ const PriorityChart: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const rawData = await getData();
+        const rawData = getData();
 
         // 데이터 처리
         const processedData = rawData.map((item: ResponseItem) => {
