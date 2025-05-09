@@ -1,0 +1,41 @@
+.subscribe {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px;
+
+  border: 1px solid $color-white-300;
+  border-radius: 4px;
+
+  &_busNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    text-align: center;
+
+    font-size: large;
+
+    color: $color-lightBlue-400;
+  }
+
+  &_stationName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    text-align: center; /* 텍스트 자체를 중앙 정렬 */
+
+    font-size: medium;
+  }
+
+  &_stationNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+    text-align: center;
+
+    font-size: small;
+  }
+}
