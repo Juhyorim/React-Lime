@@ -4,6 +4,8 @@ import BriefSubscribe from "./components/BriefSubscribe";
 import { SubscribeDTO } from "./types/subscribe";
 
 function index() {
+  // const subscribeInfoStub: SubscribeDTO[] = [];
+
   const subscribeInfoStub: SubscribeDTO[] = [
     {
       subscribeId: 1,
@@ -41,16 +43,17 @@ function index() {
 
         <div className={styles.tico_body_contents}>
           <div className={styles.title}>나의 구독</div>
-
-          <div className={styles.subscribeList}>
-            {subscribeInfoStub !== null ? (
-              subscribeInfoStub.map((item: SubscribeDTO) => {
+          {subscribeInfoStub.length !== 0 ? (
+            <div className={styles.subscribeList}>
+              {subscribeInfoStub.map((item: SubscribeDTO) => {
                 return <BriefSubscribe prop={item} key={item.subscribeId} />;
-              })
-            ) : (
-              <p>아직 구독한 버스가 없어요😥</p>
-            )}
-          </div>
+              })}
+            </div>
+          ) : (
+            <div className={styles.subscribeList_none}>
+              아직 구독한 버스가 없어요😥
+            </div>
+          )}
         </div>
 
         <div className={styles.tico_body_pad} />
