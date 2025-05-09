@@ -18,6 +18,7 @@
     "react-dom": "18.3.1",
     "react-router-dom": "^7.5.0",
     "react-simple-toasts": "^6.1.0",
+    "recharts": "^2.15.3",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
     "sort-by": "^0.0.2"
