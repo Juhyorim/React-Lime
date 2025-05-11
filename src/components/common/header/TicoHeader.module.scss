@@ -47,6 +47,10 @@
       outline: none;
       cursor: pointer;
 
+      @media (max-width: 399px) {
+        font-size: 10px;
+      }
+
       padding: 6px 10px;
 
       border: 1px solid $color-white-300;

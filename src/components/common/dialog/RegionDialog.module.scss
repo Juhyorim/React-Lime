@@ -22,7 +22,15 @@
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width: 1199px) {
+    @media (max-width: 499px) {
+      width: 90%;
+    }
+
+    @media (min-width: 500px) and (max-width: 919px) {
+      width: 460px;
+    }
+
+    @media (min-width: 920px) and (max-width: 1199px) {
       width: 50%;
     }
 
@@ -121,17 +129,17 @@
 
       overflow: auto;
 
-      @media (max-width: 419px) {
+      @media (max-width: 249px) {
         grid-template-columns: 1fr;
         gap: 10px;
       }
 
-      @media (min-width: 420px) and (max-width: 619px) {
+      @media (min-width: 250px) and (max-width: 499px) {
         grid-template-columns: 1fr 1fr; /* 2개의 열, 동일한 너비 */
         gap: 10px; /* 그리드 아이템 사이의 간격 */
       }
 
-      @media (min-width: 620px) {
+      @media (min-width: 500px) {
         grid-template-columns: 1fr 1fr 1fr;
         gap: 10px;
       }
@@ -146,7 +154,7 @@
 
   border: 1px solid $color-gray-300;
 
-  @media (max-width: 419px) {
+  @media (max-width: 499px) {
     height: 50px;
   }
 }
