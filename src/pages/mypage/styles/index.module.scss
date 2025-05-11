@@ -1,0 +1,94 @@
+.mypage {
+  display: flex;
+  flex-direction: column;
+
+  &_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 56px;
+
+    padding: 0 16px;
+
+    background-color: $color-gray-200;
+
+    &_back {
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    &_profileBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 16px;
+
+      &_user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        outline: none;
+        cursor: pointer;
+
+        padding: 1px 1px;
+        height: 40px;
+        width: 35px;
+
+        @media (max-width: 399px) {
+          width: 25px;
+          height: 30px;
+        }
+      }
+    }
+  }
+
+  &_body {
+    display: flex;
+    width: 100%;
+
+    &_pad {
+      width: 0;
+      flex-grow: 0;
+
+      @media (min-width: 800px) {
+        flex-grow: 1; //남은 공간 차지
+      }
+    }
+
+    &_contents {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%; /* 기본적으로 전체 너비 사용 */
+
+      @media (min-width: 800px) {
+        width: 800px; /* 800px 이상에서는 너비 고정 */
+        flex-shrink: 0; /* 너비 축소 방지 */
+      }
+    }
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.infoList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 10px;
+
+  &_info {
+    font-weight: 300;
+    padding-top: 10px;
+  }
+}

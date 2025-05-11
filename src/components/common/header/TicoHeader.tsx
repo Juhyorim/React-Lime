@@ -14,6 +14,11 @@ function TicoHeader({ handleRegionDialog, regionName }: Props) {
       navigate("/tico");
       return;
     }
+
+    if (filter === "mypage") {
+      navigate("/tico/mypage");
+      return;
+    }
   };
 
   const openDialog = () => {
@@ -39,7 +44,10 @@ function TicoHeader({ handleRegionDialog, regionName }: Props) {
           placeholder="버스, 정류장, 장소 검색"
         ></input>
       </div>
-      <div className={styles.header_profileBox}>
+      <div
+        className={styles.header_profileBox}
+        onClick={() => moveToPage("mypage")}
+      >
         <img
           className={styles.header_profileBox_user}
           src="/assets/icons/man-icon.png"

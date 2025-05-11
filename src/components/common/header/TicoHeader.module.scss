@@ -27,6 +27,10 @@
 
     &_title {
       font-size: 24px;
+
+      @media (max-width: 399px) {
+        font-size: 20px;
+      }
       font-weight: 600;
       font-style: italic;
     }
@@ -107,6 +111,11 @@
       padding: 1px 1px;
       height: 40px;
       width: 35px;
+
+      @media (max-width: 399px) {
+        width: 25px;
+        height: 30px;
+      }
     }
   }
 }

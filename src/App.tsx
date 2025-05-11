@@ -7,6 +7,7 @@ import LoginPage from "@pages/login/index";
 import ImageSplashPage from "@pages/imageSplash/index";
 import TicoPage from "@pages/tico/index";
 import ChartPage from "@pages/busPlot/index";
+import MyPage from "@pages/mypage/index";
 
 // import MainPage from "@pages/index/index";
 const MainPage = React.lazy(() => import("@pages/index/index"));
@@ -27,6 +28,7 @@ function App() {
           <Route path="/imageSplash" element={<ImageSplashPage />}></Route>
           <Route path="/tico" element={<TicoPage />}></Route>
           <Route path="/chart" element={<ChartPage />}></Route>
+          <Route path="/tico/mypage" element={<MyPage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
