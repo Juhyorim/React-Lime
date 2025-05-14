@@ -27,6 +27,12 @@ $NAVIGATION-HEIGHT: 50px;
       margin: 5px;
       cursor: pointer;
 
+      background-image: url("/assets/images/image-intro.png");
+      background-size: cover;
+      background-position: 100% 95%;
+      font-weight: 700;
+      color: black;
+
       @media (min-width: 410px) {
         width: 400px;
         height: 150px;
@@ -38,12 +44,6 @@ $NAVIGATION-HEIGHT: 50px;
         height: 100px;
         font-size: medium;
       }
-
-      background-image: url("/assets/images/image-intro.png");
-      background-size: cover;
-      background-position: 100% 95%;
-      font-weight: 700;
-      color: black;
     }
 
     &__tico {
@@ -54,6 +54,12 @@ $NAVIGATION-HEIGHT: 50px;
       margin: 5px;
       cursor: pointer;
 
+      background-image: url("/assets/images/image-tico.png");
+      background-size: cover;
+      background-position: 100% 15%;
+      font-weight: 700;
+      color: black;
+
       @media (min-width: 410px) {
         width: 400px;
         height: 150px;
@@ -65,12 +71,6 @@ $NAVIGATION-HEIGHT: 50px;
         height: 100px;
         font-size: medium;
       }
-
-      background-image: url("/assets/images/image-tico.png");
-      background-size: cover;
-      background-position: 100% 15%;
-      font-weight: 700;
-      color: black;
     }
 
     &__prac {
@@ -81,6 +81,12 @@ $NAVIGATION-HEIGHT: 50px;
       margin: 5px;
       cursor: pointer;
 
+      background-image: url("/assets/images/image-prac.png");
+      background-size: cover;
+      background-position: 100% 17%;
+      font-weight: 700;
+      color: black;
+
       @media (min-width: 410px) {
         width: 400px;
         height: 150px;
@@ -92,12 +98,6 @@ $NAVIGATION-HEIGHT: 50px;
         height: 100px;
         font-size: medium;
       }
-
-      background-image: url("/assets/images/image-prac.png");
-      background-size: cover;
-      background-position: 100% 17%;
-      font-weight: 700;
-      color: black;
     }
   }
 }

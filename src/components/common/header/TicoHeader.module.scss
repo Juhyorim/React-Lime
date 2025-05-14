@@ -27,12 +27,12 @@
 
     &_title {
       font-size: 24px;
+      font-weight: 600;
+      font-style: italic;
 
       @media (max-width: 399px) {
         font-size: 20px;
       }
-      font-weight: 600;
-      font-style: italic;
     }
   }
 
@@ -44,16 +44,13 @@
     gap: 16px;
 
     &_button {
+      //새로운 CSS 표준에서는 모든 선언문이 중첩규칙보다 먼저 와야한다
       display: flex;
       align-items: center;
       justify-content: center;
 
       outline: none;
       cursor: pointer;
-
-      @media (max-width: 399px) {
-        font-size: 10px;
-      }
 
       padding: 6px 10px;
 
@@ -62,12 +59,25 @@
 
       color: $color-black-900;
       background-color: $color-lightBlue-200;
+
+      @media (max-width: 399px) {
+        font-size: 10px;
+      }
     }
 
     &_input {
       display: flex;
       align-items: center;
       justify-content: center;
+
+      outline: none;
+      padding: 6px 10px;
+
+      border: 1px solid $color-white-300;
+      border-radius: 4px;
+
+      // color: $color-white-700;
+      background-color: $color-white-000;
 
       @media (min-width: 0px) and (max-width: 479px) {
         width: 150px;
@@ -80,16 +90,6 @@
       @media (min-width: 700px) {
         width: 400px;
       }
-
-      outline: none;
-
-      padding: 6px 10px;
-
-      border: 1px solid $color-white-300;
-      border-radius: 4px;
-
-      // color: $color-white-700;
-      background-color: $color-white-000;
     }
   }
 
