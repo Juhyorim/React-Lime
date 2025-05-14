@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./UseEffectPrac.module.scss";
 import Timer from "./Timer";
-import { useRecoilValueLoadable } from "recoil";
-import { locationData } from "@/recoil/selectors/locationSelector";
+// import { locationData } from "@/recoil/selectors/locationSelector";
 import Loading from "@/pages/imageSplash/components/Loading";
 
 function UseEffectPrac() {
@@ -12,7 +11,7 @@ function UseEffectPrac() {
 
   const [showTimer, setShowTImer] = useState(false);
 
-  const locationSelector = useRecoilValueLoadable(locationData);
+  // const locationSelector = useRecoilValueLoadable(locationData);
 
   //count2가 변화될 때 호출됨
   useEffect(() => {
@@ -28,13 +27,14 @@ function UseEffectPrac() {
   };
 
   const dataBlock = useMemo(() => {
-    if (locationSelector.state === "hasValue") {
-      return <div>{locationSelector.contents}</div>;
-    } else {
-      //loading일 때
-      return <Loading />;
-    }
-  }, [locationSelector]);
+    // if (locationSelector.state === "hasValue") {
+    //   return <div>{locationSelector.contents}</div>;
+    // } else {
+    //loading일 때
+    return <Loading />;
+    // }
+  }, []);
+  // }, [locationSelector]);
 
   return (
     <div className={styles.page}>

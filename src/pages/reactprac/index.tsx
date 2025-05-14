@@ -5,6 +5,7 @@ import UseStatePrac from "./components/UseStatePrac";
 import UseEffectPrac from "./components/UseEffectPrac";
 import UseRefPrac from "./components/UseRefPrac";
 import UseMemoPrac from "./components/UseMemoPrac";
+import UseMemoPrac2 from "./components/UseMemoPrac2";
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
         <p className={styles.page__contents__title}>useMemo 예시</p>
 
         <UseMemoPrac />
+
+        <p className={styles.page__contents__title}>useMemo2 실전 예시</p>
+
+        <UseMemoPrac2 />
       </div>
     </div>
   );

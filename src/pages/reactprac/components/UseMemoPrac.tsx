@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 const hardCalculate = (number: number) => {
   console.log("어려운 계산!");
