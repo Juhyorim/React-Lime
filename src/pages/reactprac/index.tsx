@@ -6,6 +6,7 @@ import UseEffectPrac from "./components/UseEffectPrac";
 import UseRefPrac from "./components/UseRefPrac";
 import UseMemoPrac from "./components/UseMemoPrac";
 import UseMemoPrac2 from "./components/UseMemoPrac2";
+import UseCallbackPrac from "./components/UseCallbackPrac";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
       <CommonNav />
 
       <div className={styles.page__contents}>
+        <p className={styles.page__contents__title}>useCallback 예시</p>
+
+        <UseCallbackPrac />
+
         <p className={styles.page__contents__title}>useEffect 예시</p>
         <UseEffectPrac />
 

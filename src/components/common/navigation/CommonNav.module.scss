@@ -10,6 +10,11 @@
 
   border-bottom: 1px solid $color-white-300;
 
+  //@TODO 나중에 접히도록 변경하기
+  @media (max-width: 800px) {
+    font-size: x-small;
+  }
+
   &_menu {
     display: flex;
     align-items: center;
