@@ -8,6 +8,7 @@ import UseMemoPrac from "./components/UseMemoPrac";
 import UseMemoPrac2 from "./components/UseMemoPrac2";
 import UseCallbackPrac from "./components/UseCallbackPrac";
 import UseReducerPrac from "./components/UseReducerPrac";
+import UseReducerPrac2 from "./components/UseReducerPrac2";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
       <CommonNav />
 
       <div className={styles.page__contents}>
+        <p className={styles.page__contents__title}>useReducer 예시1</p>
+
+        <UseReducerPrac2 />
+
         <p className={styles.page__contents__title}>useReducer 예시</p>
 
         <UseReducerPrac />
