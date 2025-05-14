@@ -13,15 +13,12 @@ function App() {
     <div className={styles.page}>
       <div className={styles.page__contents}>
         <p className={styles.page__contents__title}>useReducer 예시1</p>
-
         <UseReducerPrac2 />
 
         <p className={styles.page__contents__title}>useReducer 예시</p>
-
         <UseReducerPrac />
 
         <p className={styles.page__contents__title}>useCallback 예시</p>
-
         <UseCallbackPrac />
 
         <p className={styles.page__contents__title}>useEffect 예시</p>
@@ -34,11 +31,9 @@ function App() {
         <UseRefPrac />
 
         <p className={styles.page__contents__title}>useMemo 예시</p>
-
         <UseMemoPrac />
 
         <p className={styles.page__contents__title}>useMemo2 실전 예시</p>
-
         <UseMemoPrac2 />
       </div>
     </div>
