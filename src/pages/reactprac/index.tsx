@@ -4,6 +4,7 @@ import CommonNav from "@/components/common/navigation/CommonNav";
 import UseStatePrac from "./components/UseStatePrac";
 import UseEffectPrac from "./components/UseEffectPrac";
 import UseRefPrac from "./components/UseRefPrac";
+import UseMemoPrac from "./components/UseMemoPrac";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
 
         <p className={styles.page__contents__title}>useRef 예시</p>
         <UseRefPrac />
+
+        <p className={styles.page__contents__title}>useMemo 예시</p>
+
+        <UseMemoPrac />
       </div>
     </div>
   );
