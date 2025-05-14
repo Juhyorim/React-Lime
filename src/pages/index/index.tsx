@@ -15,6 +15,11 @@ function index() {
     return;
   };
 
+  const goToReactPrac = () => {
+    navigate("/reactprac");
+    return;
+  };
+
   return (
     <div className={styles.page}>
       {/* 공통 헤더 UI 부분 */}
@@ -29,6 +34,9 @@ function index() {
         </button>
         <button className={styles.page__btns__tico} onClick={gotoTicoPage}>
           버스정보시스템 바로가기
+        </button>
+        <button className={styles.page__btns__prac} onClick={goToReactPrac}>
+          리액트 연습장 바로가기
         </button>
       </div>
       {/* 공통 네비게이션 UI 부분 */}

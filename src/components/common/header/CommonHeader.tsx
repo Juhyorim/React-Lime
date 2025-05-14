@@ -40,12 +40,6 @@ function CommonHeader() {
       <div className={styles.header_profileBox}>
         <button
           className={styles.header_profileBox_button}
-          onClick={() => moveToPage("reactprac")}
-        >
-          리액트 연습장
-        </button>
-        <button
-          className={styles.header_profileBox_button}
           onClick={() => moveToPage("bookmark")}
         >
           북마크
