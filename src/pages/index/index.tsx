@@ -1,4 +1,5 @@
 //CSS
+import GlobalHeader from "@/components/common/header/GlobalHeader";
 import styles from "./styles/index.module.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +24,7 @@ function index() {
   return (
     <div className={styles.page}>
       {/* 공통 헤더 UI 부분 */}
-      {/* <CommonHeader /> */}
+      <GlobalHeader />
 
       <div className={styles.page__btns}>
         <button
