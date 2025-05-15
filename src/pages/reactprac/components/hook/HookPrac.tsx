@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import styles from "../styles/index.module.scss";
+import styles from "../../styles/index.module.scss";
 import UseCallbackPrac from "./UseCallbackPrac";
 import UseEffectPrac from "./UseEffectPrac";
 import UseMemoPrac from "./UseMemoPrac";
