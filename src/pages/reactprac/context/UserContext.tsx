@@ -1,6 +1,11 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 
-export const UserContext = createContext({
-  username: "",
-  email: "",
+type UserContextType = {
+  user: string;
+  setUser: Dispatch<SetStateAction<string>>;
+} | null;
+
+export const UserContext = createContext<UserContextType>({
+  user: "",
+  setUser: () => {},
 });
