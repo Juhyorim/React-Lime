@@ -8,6 +8,7 @@ import ImageSplashPage from "@pages/imageSplash/index";
 import TicoPage from "@pages/tico/index";
 import ChartPage from "@pages/busPlot/index";
 import MyPage from "@pages/mypage/index";
+import SignupPage from "@pages/signupPage/index";
 
 // import MainPage from "@pages/index/index";
 const MainPage = React.lazy(() => import("@pages/index/index"));
@@ -29,6 +30,7 @@ function App() {
           <Route path="/tico" element={<TicoPage />}></Route>
           <Route path="/chart" element={<ChartPage />}></Route>
           <Route path="/tico/mypage" element={<MyPage />}></Route>
+          <Route path="/signup" element={<SignupPage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

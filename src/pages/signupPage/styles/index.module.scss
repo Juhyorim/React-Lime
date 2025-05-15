@@ -13,7 +13,7 @@
     flex: 1;
   }
 
-  &_login {
+  &_signup {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,13 +22,21 @@
     border: 1px solid gray;
 
     background-color: $color-white-100;
-    width: 350px;
+    width: 450px;
     flex: 1;
+
+    &_item {
+      display: flex;
+      flex-direction: row;
+      font-size: medium;
+
+      margin: 5px;
+    }
 
     &_desc {
       font-size: medium;
 
-      margin: 10px;
+      margin: 15px;
     }
 
     &_inputBox {
@@ -46,10 +54,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 250px;
+      width: 150px;
       height: 30px;
 
-      margin: 5px;
+      margin: 15px;
       font-weight: 700;
 
       cursor: pointer;
@@ -58,4 +66,11 @@
       background-color: $color-blue-300;
     }
   }
+}
+
+.name {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100px;
 }

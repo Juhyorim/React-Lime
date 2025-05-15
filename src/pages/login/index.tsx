@@ -91,7 +91,7 @@ function index() {
       <div
         className={styles.page}
         style={{
-          backgroundColor: isDark ? "black" : "lightgray",
+          backgroundColor: isDark ? "black" : "white",
           color: isDark ? "white" : "black",
         }}
       >
@@ -113,6 +113,20 @@ function index() {
           <button className={styles.page_login_btn} onClick={login}>
             로그인
           </button>
+
+          <div className={styles.page_login_desc}>
+            아직 회원이 아니신가요?{" "}
+            <span
+              style={{
+                textDecoration: "underline",
+                cursor: "pointer",
+                color: "#4d40c7",
+              }}
+              onClick={() => navigate("/signup")}
+            >
+              회원가입 하러가기
+            </span>
+          </div>
         </div>
 
         <div className={styles.page_padding} />
