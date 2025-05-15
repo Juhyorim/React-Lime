@@ -29,14 +29,14 @@ function CommonHeader() {
 
   return (
     <header className={styles.header}>
-      <div className={styles.header_logoBox} onClick={() => moveToPage("main")}>
+      {/* <div className={styles.header_logoBox} onClick={() => moveToPage("main")}>
         <img
           src={`/assets/images/image-logo.png`}
           alt=""
           className={styles.header_logoBox_logo}
         />
         <span className={styles.header_logoBox_title}>Lime Project</span>
-      </div>
+      </div> */}
       <div className={styles.header_profileBox}>
         <button
           className={styles.header_profileBox_button}
@@ -53,7 +53,7 @@ function CommonHeader() {
             className={styles.header_profileBox_button}
             onClick={() => moveToPage("login")}
           >
-            로그인
+            마이페이지
           </button>
         )}
       </div>

@@ -1,0 +1,33 @@
+.contents {
+  &_title {
+    font-weight: 700;
+    font-size: large;
+    margin: 10px;
+  }
+
+  &_intro {
+    font-weight: 300;
+    font-size: large;
+
+    ul,
+    ol {
+      line-height: 1.8;
+      margin: 0;
+      padding-inline-start: 1.5em;
+      list-style-position: inside;
+    }
+  }
+
+  &_techstack {
+    font-weight: 300;
+    font-size: large;
+
+    ul,
+    ol {
+      line-height: 1.8;
+      margin: 0;
+      padding-inline-start: 1.5em;
+      list-style-position: inside;
+    }
+  }
+}

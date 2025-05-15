@@ -19,85 +19,60 @@ $NAVIGATION-HEIGHT: 50px;
 
     width: 100%;
 
-    &__photo {
+    // 공통 스타일을 mixin으로 정의
+    @mixin card-base {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 5px;
       margin: 5px;
       cursor: pointer;
+      background-size: cover;
+      font-weight: 700;
+      color: black;
 
+      @media (min-width: 410px) {
+        width: 400px;
+        height: 150px;
+        font-size: large;
+      }
+
+      @media not all and (min-width: 410px) {
+        width: 300px;
+        height: 100px;
+        font-size: medium;
+      }
+    }
+
+    &_intro {
+      @include card-base;
+      background-image: url("/assets/images/image-introduce.png");
+      background-position: 100% 1%;
+    }
+
+    &_photo {
+      @include card-base;
       background-image: url("/assets/images/image-intro.png");
-      background-size: cover;
       background-position: 100% 95%;
-      font-weight: 700;
-      color: black;
-
-      @media (min-width: 410px) {
-        width: 400px;
-        height: 150px;
-        font-size: large;
-      }
-
-      @media not all and (min-width: 410px) {
-        width: 300px;
-        height: 100px;
-        font-size: medium;
-      }
     }
 
-    &__tico {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5px;
-      margin: 5px;
-      cursor: pointer;
-
+    &_tico {
+      @include card-base;
       background-image: url("/assets/images/image-tico.png");
-      background-size: cover;
-      background-position: 100% 15%;
-      font-weight: 700;
-      color: black;
-
-      @media (min-width: 410px) {
-        width: 400px;
-        height: 150px;
-        font-size: large;
-      }
-
-      @media not all and (min-width: 410px) {
-        width: 300px;
-        height: 100px;
-        font-size: medium;
-      }
+      background-position: 100% 35%;
     }
 
-    &__prac {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5px;
-      margin: 5px;
-      cursor: pointer;
+    &_board {
+      @include card-base;
+      background-image: url("/assets/images/image-board.png");
+      background-position: 100% 65%;
+      cursor: auto;
+    }
 
+    &_prac {
+      @include card-base;
       background-image: url("/assets/images/image-prac.png");
-      background-size: cover;
       background-position: 100% 17%;
-      font-weight: 700;
-      color: black;
-
-      @media (min-width: 410px) {
-        width: 400px;
-        height: 150px;
-        font-size: large;
-      }
-
-      @media not all and (min-width: 410px) {
-        width: 300px;
-        height: 100px;
-        font-size: medium;
-      }
     }
   }
 }

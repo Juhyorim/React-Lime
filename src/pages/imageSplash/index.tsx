@@ -11,6 +11,7 @@ import styles from "./styles/index.module.scss";
 import { CardDTO } from "../index/types/card";
 import Card from "./components/Card";
 import Loading from "./components/Loading";
+import GlobalHeader from "@/components/common/header/GlobalHeader";
 
 function index() {
   // const imgSelector = useRecoilValue(imageData); //바인딩 전에 호출
@@ -52,6 +53,7 @@ function index() {
   return (
     <div className={styles.page}>
       {/* 공통 헤더 UI 부분 */}
+      <GlobalHeader />
       <CommonHeader />
 
       {/* 공통 네비게이션 UI 부분 */}

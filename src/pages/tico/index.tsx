@@ -6,6 +6,7 @@ import { useState } from "react";
 import RegionDialog from "@/components/common/dialog/RegionDialog";
 import { CityInfo } from "./cities";
 import { useNavigate } from "react-router-dom";
+import GlobalHeader from "@/components/common/header/GlobalHeader";
 
 function index() {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ function index() {
   return (
     <div className={styles.tico}>
       {/* 헤더 UI 부분 */}
+      <GlobalHeader />
       <TicoHeader
         handleRegionDialog={setRegionOpen}
         regionName={region.cityName}
