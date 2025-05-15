@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./styles/index.module.scss";
-import { UserContext } from "./context/UserContext";
 // import axios from "axios";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,7 @@ function index() {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
-  const [isDark, setIsDark] = useState(false);
+
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
 
   useEffect(() => {
@@ -83,16 +82,15 @@ function index() {
   };
 
   return (
-    <UserContext.Provider value={"알수없음"}>
-      {/* <ThemeContext.Provider value={{ isDark, setIsDark }}> */}
+    <>
       {/* 헤더 */}
       <GlobalHeader />
 
       <div
         className={styles.page}
         style={{
-          backgroundColor: isDark ? "black" : "white",
-          color: isDark ? "white" : "black",
+          backgroundColor: "white",
+          color: "black",
         }}
       >
         <div className={styles.page_padding} />
@@ -131,19 +129,9 @@ function index() {
 
         <div className={styles.page_padding} />
 
-        {/* <button
-          className={styles.page__btn}
-          onClick={() => {
-            setIsDark(!isDark);
-          }}
-        >
-          다크모드 {isDark ? "해제" : "설정"}
-        </button> */}
-
         {/* <FlowerBlock /> */}
       </div>
-      {/* </ThemeContext.Provider> */}
-    </UserContext.Provider>
+    </>
   );
 }
 

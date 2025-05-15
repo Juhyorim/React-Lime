@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ThemeContext } from "../context/ThemeContext";
-import { UserContext } from "../context/UserContext";
+import { ThemeContext } from "../../reactprac/context/ThemeContext";
+import { UserContext } from "../../reactprac/context/UserContext";
 
 function FlowerBlock() {
   // const { isDark } = useContext(ThemeContext);
