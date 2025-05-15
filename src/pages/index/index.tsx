@@ -52,14 +52,6 @@ function index() {
         </button> */}
       </div>
 
-      {/* 공통 네비게이션 UI 부분 */}
-      {/* <CommonNav /> */}
-
-      {/* 공통 푸터 UI 부분 */}
-      {/* <CommonFooter /> */}
-
-      {/* {open && <DetailDialog data={imgData} handleDialog={setOpen} />} */}
-
       <div
         style={{
           color: "black",

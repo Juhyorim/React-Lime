@@ -17,6 +17,11 @@ function GlobalHeader() {
       navigate("/login");
       return;
     }
+
+    if (filter === "mypage") {
+      navigate("/mypage");
+      return;
+    }
   };
 
   return (
@@ -49,8 +54,11 @@ function GlobalHeader() {
 
         {/* 로그인 */}
         {userInfo.token !== "" ? (
-          <button className={styles.header_profileBox_user}>
-            {userInfo.nickname} | {userInfo.email}
+          <button
+            className={styles.header_profileBox_user}
+            onClick={() => moveToPage("mypage")}
+          >
+            {userInfo.nickname} 님
           </button>
         ) : (
           <button

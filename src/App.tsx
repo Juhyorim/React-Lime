@@ -12,7 +12,8 @@ import PracPage from "@pages/reactprac/index";
 
 import BookmarkPage from "@pages/bookmark/index";
 import ChartPage from "@pages/busPlot/index";
-import MyPage from "@pages/mypage/index";
+import MyPage from "@/pages/mypage/index";
+import TicoMyPage from "@pages/ticoMypage/index";
 
 // import MainPage from "@pages/index/index";
 const MainPage = React.lazy(() => import("@pages/index/index"));
@@ -34,6 +35,7 @@ function App() {
           <Route path="/imageSplash" element={<ImageSplashPage />}></Route>
           <Route path="/tico" element={<TicoPage />}></Route>
           <Route path="/reactprac" element={<PracPage />}></Route>
+          <Route path="/mypage" element={<MyPage />}></Route>
 
           {/* 이미지스플래시 */}
           <Route
@@ -44,7 +46,7 @@ function App() {
 
           {/* 티코 */}
           <Route path="/chart" element={<ChartPage />}></Route>
-          <Route path="/tico/mypage" element={<MyPage />}></Route>
+          <Route path="/tico/mypage" element={<TicoMyPage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

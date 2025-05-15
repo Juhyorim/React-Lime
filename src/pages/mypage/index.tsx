@@ -1,50 +1,36 @@
-import styles from "./styles/index.module.scss";
+import GlobalHeader from "@/components/common/header/GlobalHeader";
+import { userInfoAtom } from "@/recoil/atoms/userInfoAtom";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
 function index() {
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
 
-  const moveToPage = (filter: string) => {
-    if (filter === "main") {
-      navigate("/tico");
-      return;
-    }
+  const logout = () => {
+    setUserInfo({
+      username: "",
+      email: "",
+      nickname: "",
+      token: "",
+    });
+
+    navigate("/");
   };
 
   return (
-    <div className={styles.mypage}>
-      <header className={styles.mypage_header}>
-        <div
-          className={styles.mypage_header_back}
-          onClick={() => moveToPage("main")}
-        >
-          {"◀"}
-        </div>
-
-        <div className={styles.mypage_header_profileBox}>
-          <img
-            className={styles.mypage_header_profileBox_user}
-            src="/assets/icons/man-icon.png"
-            alt=""
-          />
-        </div>
-      </header>
-      <div className={styles.mypage_body}>
-        <div className={styles.mypage_body_pad} />
-
-        <div className={styles.mypage_body_contents}>
-          <div className={styles.title}>마이페이지</div>
-          <div className={styles.infoList}>
-            <div className={styles.infoList_info}>아이디: asdf</div>
-            <div className={styles.infoList_info}>이메일: asdf@gmail.com</div>
-            <div className={styles.infoList_info}>이메일: asdf@gmail.com</div>
-            <div className={styles.infoList_info}>이메일: asdf@gmail.com</div>
-          </div>
-        </div>
-
-        <div className={styles.mypage_body_pad} />
+    <>
+      <GlobalHeader />
+      <div style={{ margin: "20px" }}>
+        <h2>전역 mypage</h2>
+        <br />
+        <div>아이디: {userInfo.username}</div>
+        <div>이메일: {userInfo.email}</div>
+        <div>비밀번호 수정</div>
+        <br />
+        <button onClick={() => logout()}>로그아웃</button>
       </div>
-    </div>
+    </>
   );
 }
 
