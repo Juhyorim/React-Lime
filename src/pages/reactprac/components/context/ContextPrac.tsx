@@ -10,14 +10,22 @@ import styles from "../../styles/index.module.scss";
 import { UserContext } from "../../context/UserContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import ContextAPIBlock from "./ContextAPIBlock";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { fontSizeAtom } from "../../recoil/atoms/fontSizeAtom";
+import { fontSizeLabelState } from "../../recoil/selectors/fontSizeLabelState";
 
 interface Props {
   setShowContextPrac: Dispatch<SetStateAction<boolean>>;
 }
 
 function ContextPrac({ setShowContextPrac }: Props) {
+  //context API
   const [isDark, setIsDark] = useState(false);
   const [user, setUser] = useState("알 수 없음");
+
+  //recoil
+  const [fontSize, setFontSize] = useRecoilState(fontSizeAtom);
+  const fontSizeLabel = useRecoilValue(fontSizeLabelState);
 
   const usernameInputRef = useRef<HTMLInputElement>(null);
 
@@ -86,6 +94,15 @@ function ContextPrac({ setShowContextPrac }: Props) {
       <br />
       <div style={{ width: "100%", backgroundColor: "lightgray" }}>
         recoil API실습
+      </div>
+      <div>
+        <button
+          onClick={() => setFontSize((size) => (size > 49 ? 50 : size + 1))}
+          style={{ fontSize }}
+        >
+          Click to Enlarge
+        </button>
+        <div>Current font size: ${fontSizeLabel}</div>
       </div>
     </div>
   );
