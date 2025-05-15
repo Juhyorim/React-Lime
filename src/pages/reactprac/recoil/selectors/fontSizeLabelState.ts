@@ -1,12 +1,12 @@
-import { selector } from "recoil";
-import { fontSizeAtom } from "../atoms/fontSizeAtom";
+// import { selector } from "recoil";
+// import { fontSizeAtom } from "../atoms/fontSizeAtom";
 
-export const fontSizeLabelState = selector({
-  key: "fontSizeLabelState",
-  get: ({ get }) => {
-    const fontSize = get(fontSizeAtom);
-    const unit = "px";
+// export const fontSizeLabelState = selector({
+//   key: "fontSizeLabelState",
+//   get: ({ get }) => {
+//     const fontSize = get(fontSizeAtom);
+//     const unit = "px";
 
-    return `${fontSize}${unit}`;
-  },
-});
+//     return `${fontSize}${unit}`;
+//   },
+// });

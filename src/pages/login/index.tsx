@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./styles/index.module.scss";
 // import axios from "axios";
-import { useRecoilState } from "recoil";
+// import { useRecoilState } from "recoil";
+// import { userInfoAtom } from "@/recoil/atoms/userInfoAtom";
 import { useNavigate } from "react-router-dom";
-import { userInfoAtom } from "@/recoil/atoms/userInfoAtom";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
 
 function index() {
@@ -11,15 +11,15 @@ function index() {
   const inputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
-  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  // const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
 
   useEffect(() => {
     // console.log(inputRef.current);
-    if (userInfo.token !== "") {
-      alert("이미 로그인되어있습니다.");
-      navigate("/");
-      return;
-    }
+    // if (userInfo.token !== "") {
+    //   alert("이미 로그인되어있습니다.");
+    //   navigate("/");
+    //   return;
+    // }
 
     if (inputRef.current) {
       inputRef.current.focus();
@@ -64,12 +64,12 @@ function index() {
           "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RmIiwiaWF0IjoxNzQ2ODA0OTM1LCJleHAiOjE3NDY4MTY5MzUsInRva2VuX3R5cGUiOiJhY2Nlc3MifQ.J2Zl_Pv9Srxe_7I16uqOGMsuyGN1a98r_940unsqvHg",
       };
 
-      setUserInfo({
-        username: userStub.username,
-        email: userStub.email,
-        nickname: userStub.nickname,
-        token: userStub.token,
-      });
+      // setUserInfo({
+      //   username: userStub.username,
+      //   email: userStub.email,
+      //   nickname: userStub.nickname,
+      //   token: userStub.token,
+      // });
 
       alert(`환영합니다. ${userStub.nickname}`);
 
