@@ -45,34 +45,34 @@ $NAVIGATION-HEIGHT: 50px;
     }
 
     &_intro {
-      @include card-base;
       background-image: url("/assets/images/image-introduce.png");
       background-position: 100% 1%;
+      @include card-base;
     }
 
     &_photo {
-      @include card-base;
       background-image: url("/assets/images/image-intro.png");
       background-position: 100% 95%;
+      @include card-base;
     }
 
     &_tico {
-      @include card-base;
       background-image: url("/assets/images/image-tico.png");
       background-position: 100% 35%;
+      @include card-base;
     }
 
     &_board {
-      @include card-base;
       background-image: url("/assets/images/image-board.png");
       background-position: 100% 65%;
       cursor: auto;
+      @include card-base;
     }
 
     &_prac {
-      @include card-base;
       background-image: url("/assets/images/image-prac.png");
       background-position: 100% 17%;
+      @include card-base;
     }
   }
 }
