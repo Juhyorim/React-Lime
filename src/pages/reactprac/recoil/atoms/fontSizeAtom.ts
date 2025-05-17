@@ -1,7 +1,7 @@
-// import { atom } from "recoil";
+import { atom } from "recoil";
 
-// export const fontSizeAtom = atom<number>({
-//   key: "fontSizeAtom",
-//   default: 12,
-//   // effects_UNSTABLE: [persistAtom],
-// });
+export const fontSizeAtom = atom<number>({
+  key: "fontSizeAtom",
+  default: 12,
+  // effects_UNSTABLE: [persistAtom],
+});
