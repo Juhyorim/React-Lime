@@ -4,7 +4,7 @@ import { UserContext } from "../../context/UserContext";
 
 function ContextAPIBlock() {
   const { isDark, setIsDark } = useContext(ThemeContext)!;
-  const { user, setUser } = useContext(UserContext)!;
+  const { user } = useContext(UserContext)!;
 
   return (
     <div style={{ backgroundColor: isDark ? "#1c1c1c" : "white" }}>

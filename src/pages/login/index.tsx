@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./styles/index.module.scss";
-import axios from "axios";
 import { useRecoilState } from "recoil";
 import { userInfoAtom } from "@/recoil/atoms/userInfoAtom";
 import { useNavigate } from "react-router-dom";
