@@ -1,13 +1,16 @@
+import { useRef } from "react";
 import styles from "./TicoHeader.module.scss";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
   handleRegionDialog: (eventValue: boolean) => void;
+  cityCode: number;
   regionName: string;
 }
 
-function TicoHeader({ handleRegionDialog, regionName }: Props) {
+function TicoHeader({ handleRegionDialog, cityCode, regionName }: Props) {
   const navigate = useNavigate();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   const moveToPage = (filter: string) => {
     if (filter === "main") {
@@ -19,20 +22,24 @@ function TicoHeader({ handleRegionDialog, regionName }: Props) {
       navigate("/tico/mypage");
       return;
     }
+
+    if (filter === "serach") {
+      navigate(`/tico/search?input=${searchRef}`);
+      return;
+    }
   };
 
   const openDialog = () => {
     handleRegionDialog(true);
   };
 
+  const search = () => {
+    console.log(`지역코드: ${cityCode}, 검색어: ${searchRef.current?.value}`);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.header_logoBox} onClick={() => moveToPage("main")}>
-        {/* <img
-          src={"/assets/images/image-logo.png"}
-          alt=""
-          className={styles.header_logoBox_logo}
-        /> */}
         <span className={styles.header_logoBox_title}>Tico</span>
       </div>
       <div className={styles.header_search}>
@@ -42,7 +49,11 @@ function TicoHeader({ handleRegionDialog, regionName }: Props) {
         <input
           className={styles.header_search_input}
           placeholder="버스, 정류장, 장소 검색"
+          ref={searchRef}
         ></input>
+        <button className={styles.header_search_button} onClick={search}>
+          <img src="/assets/icons/icon-search.svg" alt="" />
+        </button>
       </div>
       <div
         className={styles.header_profileBox}

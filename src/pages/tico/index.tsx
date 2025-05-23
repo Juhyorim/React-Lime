@@ -57,6 +57,7 @@ function index() {
       <TicoHeader
         handleRegionDialog={setRegionOpen}
         regionName={region.cityName}
+        cityCode={region.cityCode}
       />
 
       <div className={styles.tico_body}>
