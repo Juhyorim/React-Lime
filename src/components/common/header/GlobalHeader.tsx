@@ -1,11 +1,11 @@
-import { useRecoilState } from "recoil";
+import useAuthStore from "@/stores/authStore";
 import styles from "./GlobalHeader.module.scss";
-import { userInfoAtom } from "@/recoil/atoms/userInfoAtom";
 import { useNavigate } from "react-router-dom";
 
 function GlobalHeader() {
   const navigate = useNavigate();
-  const [userInfo] = useRecoilState(userInfoAtom);
+  const { username, nickname } = useAuthStore();
+  // const [userInfo] = useRecoilState(userInfoAtom);
 
   const moveToPage = (filter: string) => {
     if (filter === "main") {
@@ -53,12 +53,12 @@ function GlobalHeader() {
         </a>
 
         {/* 로그인 */}
-        {userInfo.token !== "" ? (
+        {username !== null && username !== "" ? (
           <button
             className={styles.header_profileBox_user}
             onClick={() => moveToPage("mypage")}
           >
-            {userInfo.nickname} 님
+            {nickname} 님
           </button>
         ) : (
           <button

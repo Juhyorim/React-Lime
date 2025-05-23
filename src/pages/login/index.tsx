@@ -1,20 +1,21 @@
 import { useEffect, useRef } from "react";
 import styles from "./styles/index.module.scss";
-import { useRecoilState } from "recoil";
-import { userInfoAtom } from "@/recoil/atoms/userInfoAtom";
 import { useNavigate } from "react-router-dom";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
+import useAuthStore from "@/stores/authStore";
+import { ErrorType } from "@/stores/error/ErrorType";
 
 function index() {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
-  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  // const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const { login, username, isLoading, error } = useAuthStore();
 
   useEffect(() => {
     // console.log(inputRef.current);
-    if (userInfo.token !== "") {
+    if (username !== null && username !== "") {
       alert("이미 로그인되어있습니다.");
       navigate("/");
       return;
@@ -25,58 +26,23 @@ function index() {
     }
   }, []);
 
-  const login = async () => {
-    if (inputRef.current && passwordInputRef.current) {
-      // await axios
-      //   .post(`http://localhost:8080/api/v1/login`, {
-      //     username: inputRef.current.value,
-      //     password: passwordInputRef.current.value,
-      //   })
-      //   .then((response) => {
-      //     console.log(response);
-      //     console.log(response.data);
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-      //     if (response.status === 200) {
-      //       console.log("로그인 성공");
-      //     }
+    if (inputRef.current?.value && passwordInputRef.current?.value) {
+      const result = await login(
+        inputRef.current.value,
+        passwordInputRef.current.value
+      );
 
-      //     setUserInfo({
-      //       username: response.data.username,
-      //       email: response.data.email,
-      //       nickname: response.data.nickname,
-      //       token: response.data.token,
-      //     });
-
-      //     alert(`환영합니다. ${response.data.nickname}`);
-
-      //     navigate("/");
-      //   })
-      //   .catch((error) => {
-      //     console.log(error.response);
-      //   });
-
-      const userStub = {
-        username: "asdf",
-        nickname: "asdf",
-        email: "asdf",
-        token:
-          "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RmIiwiaWF0IjoxNzQ2ODA0OTM1LCJleHAiOjE3NDY4MTY5MzUsInRva2VuX3R5cGUiOiJhY2Nlc3MifQ.J2Zl_Pv9Srxe_7I16uqOGMsuyGN1a98r_940unsqvHg",
-      };
-
-      setUserInfo({
-        username: userStub.username,
-        email: userStub.email,
-        nickname: userStub.nickname,
-        token: userStub.token,
-      });
-
-      alert(`환영합니다. ${userStub.nickname}`);
-
-      navigate("/");
-
-      inputRef.current.focus();
+      if (result.success) {
+        alert(`환영합니다. ${username}`);
+        navigate("/");
+      } else {
+        console.error(`로그인 실패: ${result.message}`);
+      }
     } else {
-      console.log("elselesle");
+      alert("아이디 또는 비밀번호를 입력해주세요");
     }
   };
 
@@ -107,7 +73,7 @@ function index() {
             type="text"
             placeholder="password"
           />
-          <button className={styles.page_login_btn} onClick={login}>
+          <button className={styles.page_login_btn} onClick={handleLogin}>
             로그인
           </button>
 
