@@ -3,6 +3,7 @@ import styles from "./BusListDialog.module.scss";
 import { SubscribeDTO } from "@/pages/tico/types/subscribe";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Loading from "@/pages/imageSplash/components/Loading";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -26,6 +27,7 @@ interface BusStationsResponse {
 function BusListDialog({ handleDialog, subscription }: Props) {
   const navigate = useNavigate();
   const [busStations, setBusStations] = useState<BusStation[]>([]);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   //다이얼로그 끄기
   const closeDialog = () => {
@@ -62,6 +64,8 @@ function BusListDialog({ handleDialog, subscription }: Props) {
       } catch (error) {
         console.error("버스 정보 불러오기 실패:", error);
       }
+
+      setIsLoading(false);
     };
 
     fetchBusInfo();
@@ -97,19 +101,28 @@ function BusListDialog({ handleDialog, subscription }: Props) {
             </button>
           </div>
         </div>
-        <div className={styles.container__dialog__title}>지역 설정</div>
+        <div className={styles.container__dialog__title}>버스 선택</div>
         <div className={styles.container__dialog__body}>
-          {busStations.map((item: BusStation) => {
-            return (
-              <button
-                className={styles.city}
-                onClick={() => goToChart(item)}
-                key={item.routeId}
-              >
-                {item.routeNo}
-              </button>
-            );
-          })}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            busStations.map((item: BusStation) => {
+              return (
+                <div
+                  className={styles.bus}
+                  onClick={() => goToChart(item)}
+                  key={item.routeId}
+                >
+                  <img
+                    src="./assets/icons/bus.png"
+                    className={styles.bus_icon}
+                  />
+                  <div className={styles.bus_num}>{item.routeNo}</div>
+                </div>
+              );
+            })
+          )}
+          {}
         </div>
       </div>
     </div>
