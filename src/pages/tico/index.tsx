@@ -60,7 +60,7 @@ function index() {
   const handleSubscribeClick = (subscription: SubscribeDTO) => {
     console.log(subscription.id);
 
-    if (subscription.routeId === null) {
+    if (subscription.routeId === null || subscription.routeId === "") {
       setSelected(subscription);
 
       //정보를 확인할 버스 번호 선택 다이얼로그 오픈
