@@ -8,6 +8,7 @@ import { CityInfo } from "./cities";
 import { useNavigate } from "react-router-dom";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
 import useSubscriptionStore from "@/stores/subscriptionStore";
+import BusListDialog from "@/components/common/dialog/BusListDialog";
 
 function index() {
   const navigate = useNavigate();
@@ -47,18 +48,29 @@ function index() {
   //   },
   // ];
 
+  const [selected, setSelected] = useState<SubscribeDTO | null>(null);
   const [regionOpen, setRegionOpen] = useState<boolean>(false);
+  const [busSelectionOpen, setBusSelectionOpen] = useState<boolean>(false);
+
   const [region, setRegion] = useState<CityInfo>({
     cityCode: 12,
     cityName: "세종특별시",
   }); //default 값 설정
 
-  const handleSubscribeClick = (subscribeId: number) => {
-    console.log(subscribeId);
+  const handleSubscribeClick = (subscription: SubscribeDTO) => {
+    console.log(subscription.id);
+
+    if (subscription.routeId === null) {
+      setSelected(subscription);
+
+      //정보를 확인할 버스 번호 선택 다이얼로그 오픈
+      setBusSelectionOpen(true);
+      return;
+    }
     navigate("/chart");
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   return (
     <div className={styles.tico}>
@@ -82,7 +94,7 @@ function index() {
                   <BriefSubscribe
                     prop={item}
                     key={item.id}
-                    onClick={() => handleSubscribeClick(item.id!)}
+                    onClick={() => handleSubscribeClick(item)}
                   />
                 );
               })}
@@ -99,6 +111,12 @@ function index() {
 
       {regionOpen && (
         <RegionDialog handleDialog={setRegionOpen} handleRegion={setRegion} />
+      )}
+      {busSelectionOpen && selected && (
+        <BusListDialog
+          handleDialog={setBusSelectionOpen}
+          subscription={selected}
+        />
       )}
     </div>
   );

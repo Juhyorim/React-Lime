@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 
@@ -14,11 +14,43 @@ import BookmarkPage from "@pages/bookmark/index";
 import ChartPage from "@pages/busPlot/index";
 import MyPage from "@/pages/mypage/index";
 import TicoMyPage from "@pages/ticoMypage/index";
+import axios from "axios";
+import useAuthStore from "./stores/authStore";
 
 // import MainPage from "@pages/index/index";
 const MainPage = React.lazy(() => import("@pages/index/index"));
 
 function App() {
+  const { getToken } = useAuthStore();
+
+  useEffect(() => {
+    // axios 요청 인터셉터 설정
+    const requestInterceptor = axios.interceptors.request.use((config) => {
+      const token = getToken();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
+
+    // 응답 인터셉터 (401 에러시 토큰 제거)
+    const responseInterceptor = axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401) {
+          useAuthStore.getState().clearToken();
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    // 컴포넌트 언마운트시 인터셉터 제거
+    return () => {
+      axios.interceptors.request.eject(requestInterceptor);
+      axios.interceptors.response.eject(responseInterceptor);
+    };
+  }, []);
+
   return (
     <RecoilRoot>
       <BrowserRouter>
@@ -45,8 +77,12 @@ function App() {
           <Route path="/bookmark" element={<BookmarkPage />}></Route>
 
           {/* 티코 */}
-          <Route path="/chart" element={<ChartPage />}></Route>
+          {/* <Route path="/chart" element={<ChartPage />}></Route> */}
           <Route path="/tico/mypage" element={<TicoMyPage />}></Route>
+          <Route
+            path="/chart/:cityCode/:nodeId/:routeId"
+            element={<ChartPage />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

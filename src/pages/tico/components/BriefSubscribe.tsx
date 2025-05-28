@@ -3,12 +3,15 @@ import styles from "./BriefSubscribe.module.scss";
 
 interface Props {
   prop: SubscribeDTO;
-  onClick: (subscribeId: number) => void;
+  onClick: (subscribeId: number, routeId: string | null) => void;
 }
 
 function BriefSubscribe({ prop, onClick }: Props) {
   return (
-    <div className={styles.subscribe} onClick={() => onClick(prop.id!)}>
+    <div
+      className={styles.subscribe}
+      onClick={() => onClick(prop.id!, prop.routeId)}
+    >
       <div className={styles.subscribe_busNumber}>
         {prop.routeId ? prop.routeId : "정류장"}
       </div>

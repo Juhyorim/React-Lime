@@ -1,5 +1,7 @@
 // import axios from "axios";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   ScatterChart,
   Scatter,
@@ -10,6 +12,8 @@ import {
   Tooltip,
   Cell,
 } from "recharts";
+
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 interface ProcessedDataItem {
   x: number;
@@ -30,81 +34,40 @@ interface CustomTooltipProps {
 }
 
 interface ResponseItem {
+  nodeId: string;
+  nodeName: string;
+  routeId: string;
+  routeNo: string;
   arriveTime: string;
   remainTime: number;
 }
 
-const getData = () => {
-  // const response = await axios.get(
-  //   `http://localhost:8080/api/v1/subscribe/busInfo?subscriptionId=152`,
-  //   {
-  //     headers: {
-  //       Authorization:
-  //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RmIiwiaWF0IjoxNzQ2ODA0ODA3LCJleHAiOjE3NDY4MTY4MDcsInRva2VuX3R5cGUiOiJhY2Nlc3MifQ.NicONHRE7HNMxuAzhukxjUowVTHFgAMHaddGgg-n490",
-  //     },
-  //   }
-  // );
+const getData = async (cityCode: string, nodeId: string, routeId: string) => {
+  const queryParams = {
+    cityCode: cityCode,
+    nodeId: nodeId,
+    routeId: routeId,
+  };
 
-  // console.log(response.data);
+  const response = await axios.get(`${SERVER_URL}/subscribe/busInfo/version2`, {
+    params: queryParams,
+  });
 
-  return [
-    {
-      arriveTime: "2025-05-05T19:13:42.744356",
-      remainTime: 296,
-    },
-    {
-      arriveTime: "2025-05-05T19:14:04.512089",
-      remainTime: 296,
-    },
-    {
-      arriveTime: "2025-05-05T19:13:34.805847",
-      remainTime: 175,
-    },
-    {
-      arriveTime: "2025-05-05T19:14:01.505894",
-      remainTime: 175,
-    },
-    {
-      arriveTime: "2025-05-05T19:12:58.884371",
-      remainTime: 22,
-    },
-    {
-      arriveTime: "2025-05-05T20:11:13.133401",
-      remainTime: 638,
-    },
-    {
-      arriveTime: "2025-05-05T20:12:56.733339",
-      remainTime: 638,
-    },
-    {
-      arriveTime: "2025-05-05T20:17:26.001361",
-      remainTime: 817,
-    },
-    {
-      arriveTime: "2025-05-05T20:18:56.281028",
-      remainTime: 817,
-    },
-    {
-      arriveTime: "2025-05-05T20:20:26.507285",
-      remainTime: 817,
-    },
-    {
-      arriveTime: "2025-05-05T20:21:56.755245",
-      remainTime: 817,
-    },
-    {
-      arriveTime: "2025-05-05T20:23:26.978626",
-      remainTime: 817,
-    },
-    {
-      arriveTime: "2025-05-05T20:24:57.240325",
-      remainTime: 817,
-    },
-  ];
+  console.log(response.data);
+
+  return response.data.response;
 };
+
+interface RouteParams {
+  cityCode: string;
+  nodeId: string;
+  routeId: string;
+  [key: string]: string | undefined; // 인덱스 시그니처 추가
+}
 
 const PriorityChart: React.FC = () => {
   // 상태 관리 추가
+  const { cityCode, nodeId, routeId } = useParams<RouteParams>();
   const [data, setData] = useState<ProcessedDataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -112,9 +75,16 @@ const PriorityChart: React.FC = () => {
   // useEffect를 사용하여 컴포넌트 마운트 시 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+
+      if (!cityCode || !nodeId || !routeId) {
+        setError("필수 파라미터가 누락되었습니다.");
+        return;
+      }
+
       try {
         setLoading(true);
-        const rawData = getData();
+        const rawData = await getData(cityCode!, nodeId!, routeId!);
 
         // 데이터 처리
         const processedData = rawData.map((item: ResponseItem) => {

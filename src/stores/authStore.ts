@@ -16,8 +16,10 @@ export interface AuthState {
   error: string | null;
 
   //Actions
+  getToken: () => string | null;
   login: (loginId: string, password: string) => Promise<ApiResult>;
   logout: () => void;
+  clearToken: () => void;
 }
 
 const useAuthStore = create<AuthState>()(
@@ -31,6 +33,17 @@ const useAuthStore = create<AuthState>()(
       error: null,
 
       //Actions
+      getToken: () => get().token,
+      clearToken: () => {
+        set({
+          token: null,
+          username: null,
+          nickname: null,
+          email: null,
+          isLoading: false,
+          error: null,
+        });
+      },
       login: async (loginId: string, password: string): Promise<ApiResult> => {
         // console.log(SERVER_URL);
 
@@ -56,10 +69,7 @@ const useAuthStore = create<AuthState>()(
           const { token, username, email, nickname } = response.data;
 
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          console.log(
-            "axios 헤더:",
-            axios.defaults.headers.common["Authorization"]
-          );
+
           set({
             token,
             username,
