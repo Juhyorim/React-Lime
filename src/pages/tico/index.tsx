@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
 import useSubscriptionStore from "@/stores/subscriptionStore";
 import BusListDialog from "@/components/common/dialog/BusListDialog";
+import useTicoStore from "@/stores/ticoStore";
 
 function index() {
   const navigate = useNavigate();
+  const { cityCode, cityName, setCity } = useTicoStore();
 
   const { subscriptionList, getList } = useSubscriptionStore();
 
@@ -20,42 +22,9 @@ function index() {
     getList();
   }, [getList]);
 
-  // const subscribeInfoStub: SubscribeDTO[] = [];
-  // const subscribeInfoStub: SubscribeDTO[] = [
-  //   {
-  //     id: 1,
-  //     cityCode: 37050,
-  //     nodeId: "GMB4",
-  //     nodeNo: "10004",
-  //     nodeName: "거상빌딩",
-  //     routeId: "91",
-  //   },
-  //   {
-  //     id: 2,
-  //     cityCode: 37050,
-  //     nodeId: "GMB4",
-  //     nodeNo: "10004",
-  //     nodeName: "거상빌딩",
-  //     routeId: "187",
-  //   },
-  //   {
-  //     id: 3,
-  //     cityCode: 37050,
-  //     nodeId: "GMB4",
-  //     nodeNo: "10004",
-  //     nodeName: "거상빌딩",
-  //     routeId: null,
-  //   },
-  // ];
-
   const [selected, setSelected] = useState<SubscribeDTO | null>(null);
   const [regionOpen, setRegionOpen] = useState<boolean>(false);
   const [busSelectionOpen, setBusSelectionOpen] = useState<boolean>(false);
-
-  const [region, setRegion] = useState<CityInfo>({
-    cityCode: 12,
-    cityName: "세종특별시",
-  }); //default 값 설정
 
   const handleSubscribeClick = (subscription: SubscribeDTO) => {
     console.log(subscription.id);
@@ -70,16 +39,15 @@ function index() {
     navigate("/chart");
   };
 
-  // useEffect(() => {}, []);
-
   return (
     <div className={styles.tico}>
       {/* 헤더 UI 부분 */}
       <GlobalHeader />
       <TicoHeader
         handleRegionDialog={setRegionOpen}
-        regionName={region.cityName}
-        cityCode={region.cityCode}
+        regionName={cityName}
+        cityCode={Number(cityCode)}
+        input=""
       />
 
       <div className={styles.tico_body}>
@@ -110,7 +78,7 @@ function index() {
       </div>
 
       {regionOpen && (
-        <RegionDialog handleDialog={setRegionOpen} handleRegion={setRegion} />
+        <RegionDialog handleDialog={setRegionOpen} handleRegion={setCity} />
       )}
       {busSelectionOpen && selected && (
         <BusListDialog

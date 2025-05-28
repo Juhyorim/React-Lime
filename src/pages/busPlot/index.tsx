@@ -1,4 +1,6 @@
 // import axios from "axios";
+import GlobalHeader from "@/components/common/header/GlobalHeader";
+import TicoHeader from "@/components/common/header/TicoHeader";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -167,6 +169,8 @@ const PriorityChart: React.FC = () => {
 
   return (
     <div className="w-full h-96 p-4 bg-white">
+      <GlobalHeader />
+
       <h2 className="text-xl font-semibold mb-4 text-center">
         우선순위 시각화
       </h2>

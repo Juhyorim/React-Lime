@@ -9,7 +9,7 @@ toastConfig({ theme: "dark" });
 
 interface Props {
   handleDialog: (eventValue: boolean) => void;
-  handleRegion: (eventValue: CityInfo) => void;
+  handleRegion: (cityCode: string, cityName: string) => void;
 }
 
 function RegionDialog({ handleDialog, handleRegion }: Props) {
@@ -22,7 +22,7 @@ function RegionDialog({ handleDialog, handleRegion }: Props) {
   };
 
   const changeRegion = (city: CityInfo) => {
-    handleRegion(city);
+    handleRegion(city.cityCode.toString(), city.cityName);
     handleDialog(false);
   };
 

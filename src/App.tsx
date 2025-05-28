@@ -16,6 +16,7 @@ import MyPage from "@/pages/mypage/index";
 import TicoMyPage from "@pages/ticoMypage/index";
 import axios from "axios";
 import useAuthStore from "./stores/authStore";
+import TicoSearchPage from "@pages/search/index";
 
 // import MainPage from "@pages/index/index";
 const MainPage = React.lazy(() => import("@pages/index/index"));
@@ -83,6 +84,7 @@ function App() {
             path="/chart/:cityCode/:nodeId/:routeId"
             element={<ChartPage />}
           ></Route>
+          <Route path="/tico/search" element={<TicoSearchPage />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

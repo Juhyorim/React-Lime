@@ -6,12 +6,19 @@ interface Props {
   handleRegionDialog: (eventValue: boolean) => void;
   cityCode: number;
   regionName: string;
+  input: string;
 }
 
-function TicoHeader({ handleRegionDialog, cityCode, regionName }: Props) {
+function TicoHeader({
+  handleRegionDialog,
+  cityCode,
+  regionName,
+  input,
+}: Props) {
   const navigate = useNavigate();
-  const searchRef = useRef<HTMLInputElement>(null);
 
+  const searchRef = useRef<HTMLInputElement>(null);
+  // const [_, setSearchParams] = useSearchParams();
   const moveToPage = (filter: string) => {
     if (filter === "main") {
       navigate("/tico");
@@ -23,8 +30,16 @@ function TicoHeader({ handleRegionDialog, cityCode, regionName }: Props) {
       return;
     }
 
-    if (filter === "serach") {
-      navigate(`/tico/search?input=${searchRef}`);
+    if (filter === "search") {
+      const params = {
+        cityCode: cityCode.toString(),
+        regionName: regionName,
+        input: searchRef.current?.value || "",
+      };
+
+      const queryString = new URLSearchParams(params).toString();
+      navigate(`/tico/search?${queryString}`);
+
       return;
     }
   };
@@ -35,6 +50,8 @@ function TicoHeader({ handleRegionDialog, cityCode, regionName }: Props) {
 
   const search = () => {
     console.log(`지역코드: ${cityCode}, 검색어: ${searchRef.current?.value}`);
+
+    moveToPage("search");
   };
 
   return (
@@ -50,6 +67,7 @@ function TicoHeader({ handleRegionDialog, cityCode, regionName }: Props) {
           className={styles.header_search_input}
           placeholder="버스, 정류장, 장소 검색"
           ref={searchRef}
+          defaultValue={input}
         ></input>
         <button className={styles.header_search_button} onClick={search}>
           <img
