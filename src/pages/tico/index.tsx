@@ -2,42 +2,50 @@ import TicoHeader from "@/components/common/header/TicoHeader";
 import styles from "./styles/index.module.scss";
 import BriefSubscribe from "./components/BriefSubscribe";
 import { SubscribeDTO } from "./types/subscribe";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegionDialog from "@/components/common/dialog/RegionDialog";
 import { CityInfo } from "./cities";
 import { useNavigate } from "react-router-dom";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
+import useSubscriptionStore from "@/stores/subscriptionStore";
 
 function index() {
   const navigate = useNavigate();
 
+  const { subscriptionList, getList } = useSubscriptionStore();
+
+  // 컴포넌트가 마운트될 때 구독 목록 가져오기
+  useEffect(() => {
+    getList();
+  }, [getList]);
+
   // const subscribeInfoStub: SubscribeDTO[] = [];
-  const subscribeInfoStub: SubscribeDTO[] = [
-    {
-      subscribeId: 1,
-      busNumber: "187",
-      stationName: "진평동(인동시립도서관입구방면)",
-      stationNumber: 10776,
-    },
-    {
-      subscribeId: 2,
-      busNumber: "91",
-      stationName: "거상빌딩",
-      stationNumber: 10004,
-    },
-    {
-      subscribeId: 3,
-      busNumber: "91",
-      stationName: "거상빌딩",
-      stationNumber: 10004,
-    },
-    {
-      subscribeId: 4,
-      busNumber: "91",
-      stationName: "거상빌딩",
-      stationNumber: 10004,
-    },
-  ];
+  // const subscribeInfoStub: SubscribeDTO[] = [
+  //   {
+  //     id: 1,
+  //     cityCode: 37050,
+  //     nodeId: "GMB4",
+  //     nodeNo: "10004",
+  //     nodeName: "거상빌딩",
+  //     routeId: "91",
+  //   },
+  //   {
+  //     id: 2,
+  //     cityCode: 37050,
+  //     nodeId: "GMB4",
+  //     nodeNo: "10004",
+  //     nodeName: "거상빌딩",
+  //     routeId: "187",
+  //   },
+  //   {
+  //     id: 3,
+  //     cityCode: 37050,
+  //     nodeId: "GMB4",
+  //     nodeNo: "10004",
+  //     nodeName: "거상빌딩",
+  //     routeId: null,
+  //   },
+  // ];
 
   const [regionOpen, setRegionOpen] = useState<boolean>(false);
   const [region, setRegion] = useState<CityInfo>({
@@ -49,6 +57,8 @@ function index() {
     console.log(subscribeId);
     navigate("/chart");
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className={styles.tico}>
@@ -65,14 +75,14 @@ function index() {
 
         <div className={styles.tico_body_contents}>
           <div className={styles.title}>나의 구독</div>
-          {subscribeInfoStub.length !== 0 ? (
+          {subscriptionList.length !== 0 ? (
             <div className={styles.subscribeList}>
-              {subscribeInfoStub.map((item: SubscribeDTO) => {
+              {subscriptionList.map((item: SubscribeDTO) => {
                 return (
                   <BriefSubscribe
                     prop={item}
-                    key={item.subscribeId}
-                    onClick={() => handleSubscribeClick(item.subscribeId)}
+                    key={item.id}
+                    onClick={() => handleSubscribeClick(item.id!)}
                   />
                 );
               })}

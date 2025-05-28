@@ -1,6 +1,8 @@
 export interface SubscribeDTO {
-  subscribeId: number;
-  busNumber: string;
-  stationName: string;
-  stationNumber: number;
+  id: number | null;
+  cityCode: number | null;
+  nodeId: string | null;
+  nodeNo: string | null;
+  nodeName: string | null;
+  routeId: string | null;
 }

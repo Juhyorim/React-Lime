@@ -32,7 +32,7 @@ const useAuthStore = create<AuthState>()(
 
       //Actions
       login: async (loginId: string, password: string): Promise<ApiResult> => {
-        console.log(SERVER_URL);
+        // console.log(SERVER_URL);
 
         //     if (response.status === 200) {
         //       console.log("로그인 성공");
@@ -56,12 +56,17 @@ const useAuthStore = create<AuthState>()(
           const { token, username, email, nickname } = response.data;
 
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
+          console.log(
+            "axios 헤더:",
+            axios.defaults.headers.common["Authorization"]
+          );
           set({
             token,
             username,
             email,
             nickname,
+            isLoading: false, // 이거 추가!
+            error: null,
           });
 
           return { success: true };
