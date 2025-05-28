@@ -69,7 +69,7 @@ function index() {
           <input
             ref={passwordInputRef}
             className={styles.page_login_inputBox}
-            type="text"
+            type="password"
             placeholder="password"
           />
           <button className={styles.page_login_btn} onClick={handleLogin}>
