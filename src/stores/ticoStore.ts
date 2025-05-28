@@ -10,7 +10,7 @@ export interface TicoState {
 
 const useTicoStore = create<TicoState>()(
   persist(
-    (set, get) => ({
+    (set, _) => ({
       cityCode: "12",
       cityName: "세종특별시",
 

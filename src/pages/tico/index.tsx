@@ -4,7 +4,6 @@ import BriefSubscribe from "./components/BriefSubscribe";
 import { SubscribeDTO } from "./types/subscribe";
 import { useEffect, useState } from "react";
 import RegionDialog from "@/components/common/dialog/RegionDialog";
-import { CityInfo } from "./cities";
 import { useNavigate } from "react-router-dom";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
 import useSubscriptionStore from "@/stores/subscriptionStore";

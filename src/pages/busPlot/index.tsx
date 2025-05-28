@@ -1,6 +1,5 @@
 // import axios from "axios";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
-import TicoHeader from "@/components/common/header/TicoHeader";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
