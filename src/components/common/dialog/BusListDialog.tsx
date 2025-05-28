@@ -20,9 +20,9 @@ interface BusStation {
   startNodeName: string;
 }
 
-interface BusStationsResponse {
-  busStations: BusStation[];
-}
+// interface BusStationsResponse {
+//   busStations: BusStation[];
+// }
 
 function BusListDialog({ handleDialog, subscription }: Props) {
   const navigate = useNavigate();

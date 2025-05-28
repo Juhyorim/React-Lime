@@ -3,7 +3,6 @@ import styles from "./styles/index.module.scss";
 import { useNavigate } from "react-router-dom";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
 import useAuthStore from "@/stores/authStore";
-import { ErrorType } from "@/stores/error/ErrorType";
 
 function index() {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ function index() {
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
   // const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
-  const { login, username, isLoading, error } = useAuthStore();
+  const { login, username } = useAuthStore();
 
   useEffect(() => {
     // console.log(inputRef.current);
