@@ -102,11 +102,11 @@ function BusListDialog({ handleDialog, subscription }: Props) {
           </div>
         </div>
         <div className={styles.container__dialog__title}>버스 선택</div>
-        <div className={styles.container__dialog__body}>
-          {isLoading ? (
-            <Loading />
-          ) : (
-            busStations.map((item: BusStation) => {
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className={styles.container__dialog__body}>
+            {busStations.map((item: BusStation) => {
               return (
                 <div
                   className={styles.bus}
@@ -120,10 +120,9 @@ function BusListDialog({ handleDialog, subscription }: Props) {
                   <div className={styles.bus_num}>{item.routeNo}</div>
                 </div>
               );
-            })
-          )}
-          {}
-        </div>
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
