@@ -43,7 +43,7 @@ function TicoHeader({ handleRegionDialog, cityCode, regionName }: Props) {
         <span className={styles.header_logoBox_title}>Tico</span>
       </div>
       <div className={styles.header_search}>
-        <button className={styles.header_search_button} onClick={openDialog}>
+        <button className={styles.header_search_region} onClick={openDialog}>
           {regionName}
         </button>
         <input
@@ -52,7 +52,11 @@ function TicoHeader({ handleRegionDialog, cityCode, regionName }: Props) {
           ref={searchRef}
         ></input>
         <button className={styles.header_search_button} onClick={search}>
-          <img src="/assets/icons/icon-search.svg" alt="" />
+          <img
+            src="/assets/icons/icon-search.svg"
+            alt=""
+            style={{ width: "100%" }}
+          />
         </button>
       </div>
       <div
