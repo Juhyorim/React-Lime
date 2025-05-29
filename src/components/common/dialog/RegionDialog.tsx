@@ -13,7 +13,9 @@ interface Props {
 }
 
 function RegionDialog({ handleDialog, handleRegion }: Props) {
-  const cities: CityInfo[] = citiesJson.cities;
+  const tmp: CityInfo[] = citiesJson.cities;
+
+  const cities = tmp.sort((a, b) => a.cityName.localeCompare(b.cityName));
 
   //다이얼로그 끄기
   const closeDialog = () => {

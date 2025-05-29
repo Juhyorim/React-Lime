@@ -52,9 +52,14 @@ function BusListDialog({ handleDialog, subscription }: Props) {
           params: queryParams,
         });
 
-        console.log("버스 정보:", response.data);
+        const tmp: BusStation[] = response.data.busStations;
 
-        setBusStations(response.data.busStations);
+        // routeNo 기준으로 정렬
+        const sortedBusStations = tmp.sort((a, b) =>
+          a.routeNo.localeCompare(b.routeNo)
+        );
+
+        setBusStations(sortedBusStations);
       } catch (error) {
         console.error("버스 정보 불러오기 실패:", error);
       }

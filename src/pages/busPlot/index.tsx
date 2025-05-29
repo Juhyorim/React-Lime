@@ -107,11 +107,13 @@ const PriorityChart: React.FC = () => {
 
           // 시간대를 0-24시간 범위의 소수점으로 변환 (예: 18:30 -> 18.5)
           const hourDecimal = hour + minute / 60;
+          // const size = 0.3 + ((3600 - item.remainTime) / (3600 - 1)) * 0.7;
 
           return {
             x: hourDecimal, // X축에 시간을 소수점으로 표시
             y: 0, // 모든 점을 수평선 상에 배치
-            z: (40 - item.remainTime) * 30, // 우선순위가 높을수록 버블이 더 큼
+            z: 30, // 우선순위가 높을수록 버블이 더 큼
+            // z: 100, // 우선순위가 높을수록 버블이 더 큼
             priority: item.remainTime,
             timestamp: item.arriveTime,
             timeString: `${hour.toString().padStart(2, "0")}:${minute
@@ -238,14 +240,19 @@ const PriorityChart: React.FC = () => {
               reversed={true}
               unit="---"
             />
-            <ZAxis dataKey="z" range={[30, 200]} name="우선순위" />
+            <ZAxis dataKey="z" range={[10, 200]} name="우선순위" />
             <Tooltip content={<CustomTooltip />} />
             <Scatter name="우선순위" data={data} shape="circle">
-              {data.map((_, index) => (
+              {data.map((item, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={"rgb(255, 80, 255)"}
-                  stroke="#fff"
+                  fill={`rgb(255, 80, 255, ${
+                    0.1 +
+                    ((400 - (item.priority > 400 ? 400 : item.priority)) /
+                      (400 - 1)) *
+                      0.9
+                  })`}
+                  // stroke="#aaa"
                   strokeWidth={1}
                 />
               ))}
