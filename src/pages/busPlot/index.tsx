@@ -112,7 +112,7 @@ const PriorityChart: React.FC = () => {
           return {
             x: hourDecimal, // X축에 시간을 소수점으로 표시
             y: 0, // 모든 점을 수평선 상에 배치
-            z: 30, // 우선순위가 높을수록 버블이 더 큼
+            z: (item.remainTime - 420 < 0 ? 0 : item.remainTime) / 3000, // 우선순위가 높을수록 버블이 더 큼
             // z: 100, // 우선순위가 높을수록 버블이 더 큼
             priority: item.remainTime,
             timestamp: item.arriveTime,
@@ -247,10 +247,7 @@ const PriorityChart: React.FC = () => {
                 <Cell
                   key={`cell-${index}`}
                   fill={`rgb(255, 80, 255, ${
-                    0.1 +
-                    ((400 - (item.priority > 400 ? 400 : item.priority)) /
-                      (400 - 1)) *
-                      0.9
+                    (item.priority - 420 < 0 ? 0 : item.priority) / 3000
                   })`}
                   // stroke="#aaa"
                   strokeWidth={1}
