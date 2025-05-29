@@ -3,7 +3,7 @@ import styles from "./TicoHeader.module.scss";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-  handleRegionDialog: (eventValue: boolean) => void;
+  handleRegionDialog: ((eventValue: boolean) => void) | null;
   cityCode: number;
   regionName: string;
   input: string;
@@ -45,6 +45,10 @@ function TicoHeader({
   };
 
   const openDialog = () => {
+    if (handleRegionDialog === null) {
+      return;
+    }
+
     handleRegionDialog(true);
   };
 
@@ -59,24 +63,30 @@ function TicoHeader({
       <div className={styles.header_logoBox} onClick={() => moveToPage("main")}>
         <span className={styles.header_logoBox_title}>Tico</span>
       </div>
-      <div className={styles.header_search}>
-        <button className={styles.header_search_region} onClick={openDialog}>
-          {regionName}
-        </button>
-        <input
-          className={styles.header_search_input}
-          placeholder="버스, 정류장, 장소 검색"
-          ref={searchRef}
-          defaultValue={input}
-        ></input>
-        <button className={styles.header_search_button} onClick={search}>
-          <img
-            src="/assets/icons/icon-search.svg"
-            alt=""
-            style={{ width: "100%" }}
-          />
-        </button>
-      </div>
+      {handleRegionDialog === null ? (
+        <div />
+      ) : (
+        <div className={styles.header_search}>
+          <button className={styles.header_search_region} onClick={openDialog}>
+            {regionName}
+          </button>
+
+          <input
+            className={styles.header_search_input}
+            placeholder="버스, 정류장, 장소 검색"
+            ref={searchRef}
+            defaultValue={input}
+          ></input>
+          <button className={styles.header_search_button} onClick={search}>
+            <img
+              src="/assets/icons/icon-search.svg"
+              alt=""
+              style={{ width: "100%" }}
+            />
+          </button>
+        </div>
+      )}
+
       <div
         className={styles.header_profileBox}
         onClick={() => moveToPage("mypage")}

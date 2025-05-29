@@ -1,5 +1,7 @@
 import ticoAxios from "@/api/ticoAxios";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
+import TicoHeader from "@/components/common/header/TicoHeader";
+import useTicoStore from "@/stores/ticoStore";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -51,7 +53,7 @@ const getData = async (cityCode: string, nodeId: string, routeId: string) => {
     params: queryParams,
   });
 
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data.response;
 };
@@ -66,6 +68,7 @@ interface RouteParams {
 const PriorityChart: React.FC = () => {
   // 상태 관리 추가
   const { cityCode, nodeId, routeId } = useParams<RouteParams>();
+  const { cityName, setCity } = useTicoStore();
   const [data, setData] = useState<ProcessedDataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -93,7 +96,7 @@ const PriorityChart: React.FC = () => {
           // 시간대를 0-24시간 범위의 소수점으로 변환 (예: 18:30 -> 18.5)
           const hourDecimal = hour + minute / 60;
 
-          console.log(hourDecimal);
+          // console.log(hourDecimal);
 
           return {
             x: hourDecimal, // X축에 시간을 소수점으로 표시
@@ -109,12 +112,12 @@ const PriorityChart: React.FC = () => {
         });
 
         // 시간순 정렬
-        const sortedData = processedData.sort(
-          (a: ProcessedDataItem, b: ProcessedDataItem) => a.x - b.x
-        );
+        // const sortedData = processedData.sort(
+        //   (a: ProcessedDataItem, b: ProcessedDataItem) => a.x - b.x
+        // );
 
         // console.log(sortedData)
-        setData(sortedData);
+        setData(processedData);
       } catch (err) {
         console.error("데이터 가져오기 오류:", err);
         setError("데이터를 불러오는 중 오류가 발생했습니다.");
@@ -141,7 +144,7 @@ const PriorityChart: React.FC = () => {
 
   const generateTicks = (): number[] => {
     const ticks: number[] = [];
-    for (let i = 0; i <= 24; i += 0.5) {
+    for (let i = 5; i <= 24; i += 0.5) {
       ticks.push(i);
     }
     return ticks;
@@ -167,8 +170,15 @@ const PriorityChart: React.FC = () => {
     <div className="w-full h-96 p-4 bg-white">
       <GlobalHeader />
 
+      <TicoHeader
+        handleRegionDialog={null}
+        regionName={cityName ? cityName : "세종특별시"}
+        cityCode={cityCode ? Number(cityCode) : 12}
+        input={""}
+      />
+
       <h2 className="text-xl font-semibold mb-4 text-center">
-        우선순위 시각화
+        버스 도착시간 통계
       </h2>
 
       <div className="w-full h-64 border border-gray-200 p-4 rounded">
@@ -187,7 +197,7 @@ const PriorityChart: React.FC = () => {
             dataKey="x"
             name="시간"
             type="number"
-            domain={[0, 24]} // 0-24시 전체 범위 표시
+            domain={[5, 24]} // 0-24시 전체 범위 표시
             ticks={generateTicks()} // 30분 간격 tick 명시적 설정
             tickFormatter={formatXAxisTick}
             interval={0} // 모든 틱을 표시하도록 설정
@@ -200,6 +210,7 @@ const PriorityChart: React.FC = () => {
             }}
             tick={{ fontSize: 12 }}
             allowDecimals={true}
+            reversed={true}
           />
           <ZAxis dataKey="z" range={[30, 200]} name="우선순위" />
           <Tooltip content={<CustomTooltip />} />
