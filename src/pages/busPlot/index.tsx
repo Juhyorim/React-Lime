@@ -1,7 +1,7 @@
 import ticoAxios from "@/api/ticoAxios";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
 import TicoHeader from "@/components/common/header/TicoHeader";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./styles/index.module.scss";
 
@@ -15,6 +15,7 @@ import {
   Tooltip,
   Cell,
 } from "recharts";
+import DateDropdown, { DropdownOption } from "./components/DateDropdown";
 
 interface ProcessedDataItem {
   x: number;
@@ -43,22 +44,6 @@ interface ResponseItem {
   remainTime: number;
 }
 
-const getData = async (cityCode: string, nodeId: string, routeId: string) => {
-  const queryParams = {
-    cityCode: cityCode,
-    nodeId: nodeId,
-    routeId: routeId,
-  };
-
-  const response = await ticoAxios.get(`/subscribe/busInfo/version2`, {
-    params: queryParams,
-  });
-
-  // console.log(response.data);
-
-  return response.data.response;
-};
-
 interface RouteParams {
   cityCode: string;
   nodeId: string;
@@ -67,13 +52,40 @@ interface RouteParams {
 }
 
 const PriorityChart: React.FC = () => {
-  // 상태 관리 추가
   const { cityCode, nodeId, routeId } = useParams<RouteParams>();
   const [data, setData] = useState<ProcessedDataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // useEffect를 사용하여 컴포넌트 마운트 시 데이터 가져오기
+  // 드롭다운 날짜 데이터 useMemo로 처리 - 다시 생성 방지
+  const { dateOptions, yesterdayFormatted } = useMemo(() => {
+    const formatter = new Intl.DateTimeFormat("sv-SE", {
+      timeZone: "Asia/Seoul",
+    });
+
+    const today = new Date();
+    const options = Array.from({ length: 15 }, (_, i) => {
+      const date = new Date(today.getTime());
+      date.setDate(today.getDate() - i);
+
+      return {
+        value: formatter.format(date),
+        label: i === 0 ? "오늘" : i === 1 ? "어제" : `${i}일 전`,
+      };
+    });
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    return {
+      dateOptions: options,
+      yesterdayFormatted: formatter.format(yesterday),
+    };
+  }, []);
+
+  const [selectedFruit, setSelectedFruit] = useState(yesterdayFormatted);
+  const [fruitOptions, _] = useState<DropdownOption[]>(dateOptions);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -96,8 +108,6 @@ const PriorityChart: React.FC = () => {
           // 시간대를 0-24시간 범위의 소수점으로 변환 (예: 18:30 -> 18.5)
           const hourDecimal = hour + minute / 60;
 
-          // console.log(hourDecimal);
-
           return {
             x: hourDecimal, // X축에 시간을 소수점으로 표시
             y: 0, // 모든 점을 수평선 상에 배치
@@ -111,12 +121,6 @@ const PriorityChart: React.FC = () => {
           };
         });
 
-        // 시간순 정렬
-        // const sortedData = processedData.sort(
-        //   (a: ProcessedDataItem, b: ProcessedDataItem) => a.x - b.x
-        // );
-
-        // console.log(sortedData)
         setData(processedData);
       } catch (err) {
         console.error("데이터 가져오기 오류:", err);
@@ -127,7 +131,22 @@ const PriorityChart: React.FC = () => {
     };
 
     fetchData();
-  }, []); // 빈 배열은 컴포넌트가 마운트될 때만 실행됨을 의미
+  }, [selectedFruit]); // 빈 배열은 컴포넌트가 마운트될 때만 실행됨을 의미
+
+  const getData = async (cityCode: string, nodeId: string, routeId: string) => {
+    const queryParams = {
+      cityCode: cityCode,
+      nodeId: nodeId,
+      routeId: routeId,
+      localDate: selectedFruit,
+    };
+
+    const response = await ticoAxios.get(`/subscribe/busInfo/version3`, {
+      params: queryParams,
+    });
+
+    return response.data.response;
+  };
 
   const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -179,6 +198,13 @@ const PriorityChart: React.FC = () => {
 
       <div className={styles.chart}>
         <h2 className={styles.chart_title}>버스 도착시간 통계</h2>
+
+        <DateDropdown
+          options={fruitOptions}
+          placeholder="날짜 선택"
+          value={selectedFruit}
+          onChange={setSelectedFruit}
+        />
 
         <div className={styles.chart_body}>
           <ScatterChart
