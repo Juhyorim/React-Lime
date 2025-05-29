@@ -1,8 +1,8 @@
 import { selector } from "recoil";
 import { searchState } from "../atoms/searchState";
 
-import axios from "axios";
 import { pageState } from "../atoms/pageState";
+import axios from "axios";
 
 const API_URL = "https://api.unsplash.com/search/photos";
 const API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY;

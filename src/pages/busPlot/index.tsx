@@ -1,6 +1,5 @@
-// import axios from "axios";
+import ticoAxios from "@/api/ticoAxios";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -13,8 +12,6 @@ import {
   Tooltip,
   Cell,
 } from "recharts";
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 interface ProcessedDataItem {
   x: number;
@@ -50,7 +47,7 @@ const getData = async (cityCode: string, nodeId: string, routeId: string) => {
     routeId: routeId,
   };
 
-  const response = await axios.get(`${SERVER_URL}/subscribe/busInfo/version2`, {
+  const response = await ticoAxios.get(`/subscribe/busInfo/version2`, {
     params: queryParams,
   });
 

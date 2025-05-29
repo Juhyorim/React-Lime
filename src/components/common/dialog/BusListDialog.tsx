@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./BusListDialog.module.scss";
 import { SubscribeDTO } from "@/pages/tico/types/subscribe";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "@/pages/imageSplash/components/Loading";
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+import ticoAxios from "@/api/ticoAxios";
 
 interface Props {
   handleDialog: (eventValue: boolean) => void;
@@ -19,10 +17,6 @@ interface BusStation {
   endNodeName: string;
   startNodeName: string;
 }
-
-// interface BusStationsResponse {
-//   busStations: BusStation[];
-// }
 
 function BusListDialog({ handleDialog, subscription }: Props) {
   const navigate = useNavigate();
@@ -54,7 +48,7 @@ function BusListDialog({ handleDialog, subscription }: Props) {
           nodeId: subscription.nodeId,
         };
 
-        const response = await axios.get(`${SERVER_URL}/bus-info/bus-route`, {
+        const response = await ticoAxios.get(`/bus-info/bus-route`, {
           params: queryParams,
         });
 

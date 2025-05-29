@@ -1,10 +1,8 @@
 import { create } from "zustand";
 import { ApiResult, ErrorResult } from "./result/APIResult";
-import axios from "axios";
 import { ErrorType } from "./error/ErrorType";
 import { SubscribeDTO } from "@/pages/tico/types/subscribe";
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+import ticoAxios from "@/api/ticoAxios";
 
 // 스토어 상태 인터페이스
 export interface SubscriptionStoreState {
@@ -29,9 +27,9 @@ const useSubscriptionStore = create<SubscriptionStoreState>((set) => ({
     try {
       console.log(
         "현재 axios 기본 헤더:",
-        axios.defaults.headers.common["Authorization"]
+        ticoAxios.defaults.headers.common["Authorization"]
       );
-      const response = await axios.get(`${SERVER_URL}/subscribe`);
+      const response = await ticoAxios.get(`/subscribe`);
       console.log(response);
 
       set({
