@@ -1,9 +1,10 @@
 import ticoAxios from "@/api/ticoAxios";
 import GlobalHeader from "@/components/common/header/GlobalHeader";
 import TicoHeader from "@/components/common/header/TicoHeader";
-import useTicoStore from "@/stores/ticoStore";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import styles from "./styles/index.module.scss";
+
 import {
   ScatterChart,
   Scatter,
@@ -68,7 +69,6 @@ interface RouteParams {
 const PriorityChart: React.FC = () => {
   // 상태 관리 추가
   const { cityCode, nodeId, routeId } = useParams<RouteParams>();
-  const { cityName, setCity } = useTicoStore();
   const [data, setData] = useState<ProcessedDataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -100,7 +100,7 @@ const PriorityChart: React.FC = () => {
 
           return {
             x: hourDecimal, // X축에 시간을 소수점으로 표시
-            y: 1, // 모든 점을 수평선 상에 배치
+            y: 0, // 모든 점을 수평선 상에 배치
             z: (40 - item.remainTime) * 30, // 우선순위가 높을수록 버블이 더 큼
             priority: item.remainTime,
             timestamp: item.arriveTime,
@@ -156,7 +156,7 @@ const PriorityChart: React.FC = () => {
     const minutes = Math.round((value - hours) * 60);
 
     if (minutes === 0) {
-      return `${hours}시`;
+      return `${hours}:00`;
     } else {
       return `${hours}:${minutes.toString().padStart(2, "0")}`;
     }
@@ -167,64 +167,65 @@ const PriorityChart: React.FC = () => {
   if (error) return <div className="p-4 text-red-500">{error}</div>;
 
   return (
-    <div className="w-full h-96 p-4 bg-white">
+    <div>
       <GlobalHeader />
 
       <TicoHeader
         handleRegionDialog={null}
-        regionName={cityName ? cityName : "세종특별시"}
-        cityCode={cityCode ? Number(cityCode) : 12}
+        regionName={""}
+        cityCode={1}
         input={""}
       />
 
-      <h2 className="text-xl font-semibold mb-4 text-center">
-        버스 도착시간 통계
-      </h2>
+      <div className={styles.chart}>
+        <h2 className={styles.chart_title}>버스 도착시간 통계</h2>
 
-      <div className="w-full h-64 border border-gray-200 p-4 rounded">
-        <ScatterChart
-          width={250}
-          height={2500}
-          margin={{ top: 20, right: 20, bottom: 30, left: 20 }}
-        >
-          <CartesianGrid
-            strokeDasharray="3 3"
-            vertical={true}
-            horizontal={false}
-          />
-          <XAxis dataKey="y" type="number" domain={[0, 2]} hide={true} />
-          <YAxis
-            dataKey="x"
-            name="시간"
-            type="number"
-            domain={[5, 24]} // 0-24시 전체 범위 표시
-            ticks={generateTicks()} // 30분 간격 tick 명시적 설정
-            tickFormatter={formatXAxisTick}
-            interval={0} // 모든 틱을 표시하도록 설정
-            textAnchor="end" // 텍스트 정렬 방식
-            height={60} // X축 높이 증가
-            label={{
-              value: "시간 (30분 단위)",
-              position: "bottom",
-              offset: 35, // 레이블 위치 조정
-            }}
-            tick={{ fontSize: 12 }}
-            allowDecimals={true}
-            reversed={true}
-          />
-          <ZAxis dataKey="z" range={[30, 200]} name="우선순위" />
-          <Tooltip content={<CustomTooltip />} />
-          <Scatter name="우선순위" data={data} shape="circle">
-            {data.map((_, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={"rgb(255, 80, 255)"}
-                stroke="#fff"
-                strokeWidth={1}
-              />
-            ))}
-          </Scatter>
-        </ScatterChart>
+        <div className={styles.chart_body}>
+          <ScatterChart
+            width={150}
+            height={3500}
+            margin={{ top: 20, right: 20, bottom: 30, left: 20 }}
+          >
+            <CartesianGrid
+              strokeDasharray="3 3"
+              vertical={false}
+              horizontal={false}
+            />
+            <XAxis dataKey="y" type="number" domain={[0, 1]} hide={true} />
+            <YAxis
+              dataKey="x"
+              name="시간"
+              type="number"
+              domain={[5, 24]} // 0-24시 전체 범위 표시
+              ticks={generateTicks()} // 30분 간격 tick 명시적 설정
+              tickFormatter={formatXAxisTick}
+              interval={0} // 모든 틱을 표시하도록 설정
+              textAnchor="end" // 텍스트 정렬 방식
+              height={100} // X축 높이 증가
+              label={{
+                value: "시간 (30분 단위)",
+                position: "bottom",
+                offset: 35, // 레이블 위치 조정
+              }}
+              tick={{ fontSize: 20 }}
+              allowDecimals={true}
+              reversed={true}
+              unit="---"
+            />
+            <ZAxis dataKey="z" range={[30, 200]} name="우선순위" />
+            <Tooltip content={<CustomTooltip />} />
+            <Scatter name="우선순위" data={data} shape="circle">
+              {data.map((_, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={"rgb(255, 80, 255)"}
+                  stroke="#fff"
+                  strokeWidth={1}
+                />
+              ))}
+            </Scatter>
+          </ScatterChart>
+        </div>
       </div>
     </div>
   );
