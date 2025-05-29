@@ -235,7 +235,7 @@ const PriorityChart: React.FC = () => {
                 position: "bottom",
                 offset: 35, // 레이블 위치 조정
               }}
-              tick={{ fontSize: 20 }}
+              // tick={{ fontSize: 15 }}
               allowDecimals={true}
               reversed={true}
               unit="---"
