@@ -38,22 +38,18 @@ ticoAxios.interceptors.response.use(
     };
 
     console.log(error);
+
     if (axios.isAxiosError(error) && error.response) {
       const status = error.response.status;
 
       if (status === 401 && !originalRequest._retry) {
         console.log("토큰 만료");
-        // 토큰 만료 시 재시도
-        originalRequest._retry = true;
-        const newAccessToken = tokenManager.getToken();
 
-        if (newAccessToken) {
-          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-          return ticoAxios(originalRequest);
-        } else {
-          // 토큰이 없으면 로그아웃
-          tokenManager.logout();
-        }
+        // 토큰 만료 시 다시 로그인시킴 @TODO 나중에 refresh 적용
+        alert("세션이 만료되었습니다. 다시 로그인해주세요");
+
+        tokenManager.logout();
+        window.location.href = "/login";
       } else if (status === 403) {
         console.error("접근 권한이 없습니다:", error.response.data);
       } else if (status === 404) {
