@@ -1,5 +1,4 @@
 import ticoAxios from "@/api/ticoAxios";
-import GlobalHeader from "@/components/common/header/GlobalHeader";
 import TicoHeader from "@/components/common/header/TicoHeader";
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
@@ -109,12 +108,19 @@ const PriorityChart: React.FC = () => {
           const hourDecimal = hour + minute / 60;
           // const size = 0.3 + ((3600 - item.remainTime) / (3600 - 1)) * 0.7;
 
+          let priority = 0.1;
+
+          if (Number(item.remainTime) <= 300) {
+            priority = 1.0;
+          } else if (Number(item.remainTime) <= 900) {
+            priority = 1.0 - ((Number(item.remainTime) - 301) / 599) * 0.9;
+          }
+
           return {
             x: hourDecimal, // X축에 시간을 소수점으로 표시
             y: 0, // 모든 점을 수평선 상에 배치
-            z: (item.remainTime - 420 < 0 ? 0 : item.remainTime) / 3000, // 우선순위가 높을수록 버블이 더 큼
-            // z: 100, // 우선순위가 높을수록 버블이 더 큼
-            priority: item.remainTime,
+            z: priority * 200, // 우선순위가 높을수록 버블이 더 큼 0.1 ~ 1.0 => 20 ~ 200
+            priority: priority,
             timestamp: item.arriveTime,
             timeString: `${hour.toString().padStart(2, "0")}:${minute
               .toString()
@@ -189,8 +195,6 @@ const PriorityChart: React.FC = () => {
 
   return (
     <div>
-      <GlobalHeader />
-
       <TicoHeader
         handleRegionDialog={null}
         regionName={""}
@@ -240,14 +244,19 @@ const PriorityChart: React.FC = () => {
               reversed={true}
               unit="---"
             />
-            <ZAxis dataKey="z" range={[10, 200]} name="우선순위" />
+            <ZAxis dataKey="z" range={[20, 200]} name="우선순위" />
             <Tooltip content={<CustomTooltip />} />
             <Scatter name="우선순위" data={data} shape="circle">
               {data.map((item, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={`rgb(255, 80, 255, ${
-                    (item.priority - 420 < 0 ? 0 : item.priority) / 3000
+                    item.priority
+                    // item.priority <= 300 //5분아래면 정확하다고 판단
+                    //   ? 1.0
+                    //   : item.priority <= 900 //5분 ~ 15분 나쁘지않음
+                    //   ? 1.0 - ((item.priority - 301) / 599) * 0.9
+                    //   : 0.1
                   })`}
                   // stroke="#aaa"
                   strokeWidth={1}

@@ -62,6 +62,9 @@ function TicoHeader({
     <header className={styles.header}>
       <div className={styles.header_logoBox} onClick={() => moveToPage("main")}>
         <span className={styles.header_logoBox_title}>Tico</span>
+        <span style={{ fontSize: "10px", width: "20px" }}>
+          <a href="/">라임홈페이지</a>
+        </span>
       </div>
       {handleRegionDialog === null ? (
         <div />

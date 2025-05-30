@@ -40,8 +40,6 @@ function index() {
 
   return (
     <div className={styles.tico}>
-      {/* 헤더 UI 부분 */}
-      <GlobalHeader />
       <TicoHeader
         handleRegionDialog={setRegionOpen}
         regionName={cityName}

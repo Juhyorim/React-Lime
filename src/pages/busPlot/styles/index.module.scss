@@ -17,14 +17,14 @@
     border: 1px solid #ddd;
 
     width: 100%;
-    height: calc(100vh - 230px);
+    height: calc(100vh - 170px);
 
     overflow: auto;
 
     font-size: 20px;
 
     @media (max-width: 499px) {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 }
