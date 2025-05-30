@@ -25,6 +25,11 @@ function TicoHeader({
       return;
     }
 
+    if (filter === "home") {
+      navigate("/");
+      return;
+    }
+
     if (filter === "mypage") {
       navigate("/tico/mypage");
       return;
@@ -60,10 +65,20 @@ function TicoHeader({
 
   return (
     <header className={styles.header}>
-      <div className={styles.header_logoBox} onClick={() => moveToPage("main")}>
-        <span className={styles.header_logoBox_title}>Tico</span>
-        <span style={{ fontSize: "10px", width: "20px" }}>
-          <a href="/">라임홈페이지</a>
+      <div className={styles.header_logoBox}>
+        <span
+          className={styles.header_logoBox_title}
+          onClick={() => moveToPage("main")}
+        >
+          Tico
+        </span>
+        <span style={{ width: "25px" }}>
+          <button
+            style={{ fontSize: "10px", padding: "0", margin: "0" }}
+            onClick={() => moveToPage("home")}
+          >
+            메인페이지
+          </button>
         </span>
       </div>
       {handleRegionDialog === null ? (

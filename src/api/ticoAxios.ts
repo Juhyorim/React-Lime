@@ -37,10 +37,12 @@ ticoAxios.interceptors.response.use(
       _retry?: boolean;
     };
 
+    console.log(error);
     if (axios.isAxiosError(error) && error.response) {
       const status = error.response.status;
 
       if (status === 401 && !originalRequest._retry) {
+        console.log("토큰 만료");
         // 토큰 만료 시 재시도
         originalRequest._retry = true;
         const newAccessToken = tokenManager.getToken();
