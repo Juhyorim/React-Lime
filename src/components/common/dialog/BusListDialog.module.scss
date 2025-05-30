@@ -1,3 +1,9 @@
+$border-color: rgba(0, 0, 0, 0.21);
+$text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+$blue-start: rgba(102, 152, 203, 1);
+$blue-end: rgba(92, 138, 184, 1);
+$blue-active: #608fbf;
+
 .container {
   position: fixed;
   z-index: 1; //기존 레이아웃 위에 띄우기 위함
@@ -123,13 +129,15 @@
 
     &__body {
       display: grid;
-      width: 100%;
-      padding: 0px 20px 10px 20px;
+      padding: 5px 5px 5px 15px;
 
-      height: calc(100% - 95px);
       border: 1px solid #ddd;
 
+      flex: 1;
+      width: 100%;
+      height: calc(80vh - 100px);
       overflow: auto;
+      align-content: start;
 
       @media (max-width: 249px) {
         grid-template-columns: 1fr;
@@ -155,20 +163,45 @@
   align-items: center;
   justify-content: center;
 
-  background-color: $color-white-000;
+  background-color: #6698cb;
   color: $color-black-900;
   height: 100px;
 
+  // 모든 스타일을 하나로 통합
+  text-decoration: none;
+  color: white;
+  padding: 4px 4px;
+  font-size: 12px;
+  border: 1px solid $border-color;
+  border-bottom: 4px solid $border-color;
+  border-radius: 4px;
+  text-shadow: $text-shadow;
+  background: $blue-start;
+  background: -moz-linear-gradient(top, $blue-start 0%, $blue-end 100%);
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, $blue-start),
+    color-stop(100%, $blue-end)
+  );
+  background: -webkit-linear-gradient(top, $blue-start 0%, $blue-end 100%);
+  background: -o-linear-gradient(top, $blue-start 0%, $blue-end 100%);
+  background: -ms-linear-gradient(top, $blue-start 0%, $blue-end 100%);
+  background: linear-gradient(to bottom, $blue-start 0%, $blue-end 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6698cb', endColorstr='#5c8ab8', GradientType=0);
+
   cursor: pointer;
 
-  border: 1px solid $color-gray-300;
+  &:active {
+    background: $blue-active;
+  }
 
   @media (max-width: 499px) {
     height: 70px;
   }
 
   &_icon {
-    width: 80px;
+    width: 70px;
 
     @media (max-width: 499px) {
       width: 0px;
