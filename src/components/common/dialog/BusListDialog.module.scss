@@ -129,15 +129,17 @@ $blue-active: #608fbf;
 
     &__body {
       display: grid;
-      padding: 5px 5px 5px 15px;
+      padding: 5px 10px 5px 10px;
 
       border: 1px solid #ddd;
 
       flex: 1;
       width: 100%;
-      height: calc(80vh - 100px);
+
       overflow: auto;
       align-content: start;
+
+      border-radius: 12px;
 
       @media (max-width: 249px) {
         grid-template-columns: 1fr;
