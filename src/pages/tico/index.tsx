@@ -5,7 +5,6 @@ import { SubscribeDTO } from "./types/subscribe";
 import { useEffect, useState } from "react";
 import RegionDialog from "@/components/common/dialog/RegionDialog";
 import { useNavigate } from "react-router-dom";
-import GlobalHeader from "@/components/common/header/GlobalHeader";
 import useSubscriptionStore from "@/stores/subscriptionStore";
 import BusListDialog from "@/components/common/dialog/BusListDialog";
 import useTicoStore from "@/stores/ticoStore";

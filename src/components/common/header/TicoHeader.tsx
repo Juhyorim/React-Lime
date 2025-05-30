@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import styles from "./TicoHeader.module.scss";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "@/stores/authStore";
 
 interface Props {
   handleRegionDialog: ((eventValue: boolean) => void) | null;
@@ -16,6 +17,7 @@ function TicoHeader({
   input,
 }: Props) {
   const navigate = useNavigate();
+  const { username } = useAuthStore();
 
   const searchRef = useRef<HTMLInputElement>(null);
   // const [_, setSearchParams] = useSearchParams();
@@ -27,6 +29,11 @@ function TicoHeader({
 
     if (filter === "home") {
       navigate("/");
+      return;
+    }
+
+    if (filter === "login") {
+      navigate("/login");
       return;
     }
 
@@ -105,15 +112,22 @@ function TicoHeader({
         </div>
       )}
 
-      <div
-        className={styles.header_profileBox}
-        onClick={() => moveToPage("mypage")}
-      >
-        <img
-          className={styles.header_profileBox_user}
-          src="/assets/icons/man-icon.png"
-          alt=""
-        />
+      <div className={styles.header_profileBox}>
+        {username !== null && username !== "" ? (
+          <img
+            className={styles.header_profileBox_user}
+            src="/assets/icons/man-icon.png"
+            alt=""
+            onClick={() => moveToPage("mypage")}
+          />
+        ) : (
+          <button
+            className={styles.header_profileBox_login}
+            onClick={() => moveToPage("login")}
+          >
+            로그인/회원가입
+          </button>
+        )}
       </div>
     </header>
   );

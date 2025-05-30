@@ -9,12 +9,11 @@ function index() {
   const inputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
-  // const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
-  const { login, username } = useAuthStore();
+  const { login, nickname } = useAuthStore();
 
   useEffect(() => {
     // console.log(inputRef.current);
-    if (username !== null && username !== "") {
+    if (nickname !== null && nickname !== "") {
       alert("이미 로그인되어있습니다.");
       navigate("/");
       return;
@@ -35,7 +34,7 @@ function index() {
       );
 
       if (result.success) {
-        alert(`환영합니다. ${username}`);
+        alert(`환영합니다.`);
         navigate("/");
       } else {
         console.error(`로그인 실패: ${result.message}`);
