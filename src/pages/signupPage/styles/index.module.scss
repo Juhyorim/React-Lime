@@ -25,17 +25,19 @@
     width: 450px;
     flex: 1;
 
+    @media (max-width: 500px) {
+      width: 95%;
+      font-size: small;
+    }
+
     &_item {
       display: flex;
       flex-direction: row;
-      font-size: medium;
 
       margin: 5px;
     }
 
     &_desc {
-      font-size: medium;
-
       margin: 15px;
     }
 
@@ -44,10 +46,14 @@
       width: 250px;
       height: 30px;
 
-      font-size: medium;
-
       margin: 5px;
       padding: 5px;
+
+      @media (max-width: 500px) {
+        width: 180px;
+        margin: 1px;
+        padding: 2px;
+      }
     }
 
     &_btn {
@@ -64,6 +70,10 @@
 
       border: none;
       background-color: $color-blue-300;
+
+      @media (max-width: 500px) {
+        margin: 10px;
+      }
     }
   }
 }
@@ -73,4 +83,8 @@
   justify-content: start;
   align-items: center;
   width: 100px;
+
+  @media (max-width: 500px) {
+    width: 85x;
+  }
 }
