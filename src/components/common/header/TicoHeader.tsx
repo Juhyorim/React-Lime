@@ -101,6 +101,11 @@ function TicoHeader({
             placeholder="버스, 정류장, 장소 검색"
             ref={searchRef}
             defaultValue={input}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                search();
+              }
+            }}
           ></input>
           <button className={styles.header_search_button} onClick={search}>
             <img
