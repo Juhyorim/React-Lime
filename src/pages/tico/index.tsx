@@ -79,7 +79,8 @@ function index() {
       {busSelectionOpen && selected && (
         <BusListDialog
           handleDialog={setBusSelectionOpen}
-          subscription={selected}
+          cityCode={selected.cityCode!}
+          nodeId={selected.nodeId!}
         />
       )}
     </div>

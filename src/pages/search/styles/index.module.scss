@@ -1,0 +1,103 @@
+$border-color: rgba(0, 0, 0, 0.21);
+$text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+$blue-start: rgba(102, 152, 203, 1);
+$blue-end: #5c8ab8;
+$blue-active: #608fbf;
+
+.search {
+  display: flex;
+  flex-direction: column;
+
+  &_body {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+    &_title {
+      font-size: large;
+      margin-bottom: 10px;
+    }
+
+    &_contents {
+      display: flex;
+      flex-direction: column;
+      // flex-direction: column;
+      width: 100%;
+    }
+  }
+}
+
+.contents {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px;
+
+  &_station {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: medium;
+
+    padding: 5px;
+    margin: 5px;
+    border-radius: 12px;
+    border: 1px solid #333;
+
+    &_info {
+      width: 100%;
+      font-size: medium;
+      padding: 5px;
+
+      @media (max-width: 499px) {
+        font-size: small;
+      }
+    }
+
+    &_btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      background-color: #6698cb;
+      color: $color-black-900;
+
+      // 모든 스타일을 하나로 통합
+      text-decoration: none;
+      color: white;
+      padding: 4px 4px;
+      font-size: 12px;
+      border: 1px solid $border-color;
+      border-bottom: 4px solid $border-color;
+      border-radius: 4px;
+      text-shadow: $text-shadow;
+      background: $blue-start;
+      background: -moz-linear-gradient(top, $blue-start 0%, $blue-end 100%);
+      background: -webkit-gradient(
+        left top,
+        left bottom,
+        color-stop(0%, $blue-start),
+        color-stop(100%, $blue-end)
+      );
+      background: -webkit-linear-gradient(top, $blue-start 0%, $blue-end 100%);
+      background: -o-linear-gradient(top, $blue-start 0%, $blue-end 100%);
+      background: -ms-linear-gradient(top, $blue-start 0%, $blue-end 100%);
+      background: linear-gradient(to bottom, $blue-start 0%, $blue-end 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6698cb', endColorstr='#5c8ab8', GradientType=0);
+
+      cursor: pointer;
+
+      height: 30px;
+      width: 100px;
+
+      &:active {
+        background: $blue-active;
+      }
+
+      @media (max-width: 499px) {
+        font-size: small;
+        height: 25px;
+      }
+    }
+  }
+}

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import styles from "./BusListDialog.module.scss";
-import { SubscribeDTO } from "@/pages/tico/types/subscribe";
 import { useNavigate } from "react-router-dom";
 import Loading from "@/pages/imageSplash/components/Loading";
 import ticoAxios from "@/api/ticoAxios";
 
 interface Props {
   handleDialog: (eventValue: boolean) => void;
-  subscription: SubscribeDTO;
+  cityCode: number;
+  nodeId: string;
 }
 
-interface BusStation {
+interface BusRoute {
   routeId: string;
   routeNo: string;
   routEtp: string;
@@ -18,9 +18,9 @@ interface BusStation {
   startNodeName: string;
 }
 
-function BusListDialog({ handleDialog, subscription }: Props) {
+function BusListDialog({ handleDialog, cityCode, nodeId }: Props) {
   const navigate = useNavigate();
-  const [busStations, setBusStations] = useState<BusStation[]>([]);
+  const [busRoutes, setBusRoutes] = useState<BusRoute[]>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   //다이얼로그 끄기
@@ -28,15 +28,8 @@ function BusListDialog({ handleDialog, subscription }: Props) {
     handleDialog(false);
   };
 
-  const goToChart = (station: BusStation) => {
-    navigate(
-      "/chart/" +
-        subscription.cityCode +
-        "/" +
-        subscription.nodeId +
-        "/" +
-        station.routeId
-    );
+  const goToChart = (station: BusRoute) => {
+    navigate("/chart/" + cityCode + "/" + nodeId + "/" + station.routeId);
   };
 
   useEffect(() => {
@@ -44,22 +37,22 @@ function BusListDialog({ handleDialog, subscription }: Props) {
     const fetchBusInfo = async () => {
       try {
         const queryParams = {
-          cityCode: subscription.cityCode,
-          nodeId: subscription.nodeId,
+          cityCode: cityCode,
+          nodeId: nodeId,
         };
 
         const response = await ticoAxios.get(`/bus-info/bus-route`, {
           params: queryParams,
         });
 
-        const tmp: BusStation[] = response.data.busStations;
+        const tmp: BusRoute[] = response.data.busStations;
 
         // routeNo 기준으로 정렬
         const sortedBusStations = tmp.sort((a, b) =>
           a.routeNo.localeCompare(b.routeNo)
         );
 
-        setBusStations(sortedBusStations);
+        setBusRoutes(sortedBusStations);
       } catch (error) {
         console.error("버스 정보 불러오기 실패:", error);
       }
@@ -105,17 +98,17 @@ function BusListDialog({ handleDialog, subscription }: Props) {
           <Loading />
         ) : (
           <div className={styles.container__dialog__body}>
-            {busStations.map((item: BusStation) => {
+            {busRoutes.map((item: BusRoute) => {
               return (
                 <div
                   className={styles.bus}
                   onClick={() => goToChart(item)}
                   key={item.routeId}
                 >
-                  <img
+                  {/* <img
                     src="./assets/icons/bus.png"
                     className={styles.bus_icon}
-                  />
+                  /> */}
                   <div className={styles.bus_num}>{item.routeNo}</div>
                 </div>
               );
