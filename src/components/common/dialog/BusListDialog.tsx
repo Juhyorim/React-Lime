@@ -33,6 +33,10 @@ function BusListDialog({ handleDialog, cityCode, nodeId }: Props) {
     navigate("/chart/" + cityCode + "/" + nodeId + "/" + station.routeId);
   };
 
+  const goToTotalChart = () => {
+    navigate("/chart2/" + cityCode + "/" + nodeId);
+  };
+
   useEffect(() => {
     // 버스 정보 불러오기
     const fetchBusInfo = async () => {
@@ -99,6 +103,17 @@ function BusListDialog({ handleDialog, cityCode, nodeId }: Props) {
           <Loading />
         ) : (
           <div className={styles.container__dialog__body}>
+            <div
+              className={styles.bus}
+              onClick={() => goToTotalChart()}
+              key="totalBusInfoGO"
+            >
+              {/* <img
+                src="./assets/icons/bus.png"
+                className={styles.bus_icon}
+              /> */}
+              <div className={styles.bus_total}>전체보기</div>
+            </div>
             {busRoutes.map((item: BusRoute) => {
               return (
                 <div
