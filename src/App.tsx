@@ -12,6 +12,7 @@ import PracPage from "@pages/reactprac/index";
 
 import BookmarkPage from "@pages/bookmark/index";
 import ChartPage from "@pages/busPlot/index";
+import ChartPage2 from "@pages/busPlot2/index";
 import MyPage from "@/pages/mypage/index";
 import TicoMyPage from "@pages/ticoMypage/index";
 import TicoSearchPage from "@pages/search/index";
@@ -51,6 +52,10 @@ function App() {
           <Route
             path="/chart/:cityCode/:nodeId/:routeId"
             element={<ChartPage />}
+          ></Route>
+          <Route
+            path="/chart2/:cityCode/:nodeId/:routeId"
+            element={<ChartPage2 />}
           ></Route>
           <Route path="/tico/search" element={<TicoSearchPage />} />
         </Routes>

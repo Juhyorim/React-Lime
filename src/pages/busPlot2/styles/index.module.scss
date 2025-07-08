@@ -1,0 +1,372 @@
+// BusRoute.module.scss
+// 변수 정의
+$primary-blue: #2563eb;
+$blue-500: #2499f2;
+$orange-500: #f97316;
+$green-500: #22c55e;
+$red-500: #ef4444;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-400: #9ca3af;
+$gray-500: #6b7280;
+$gray-600: #374151;
+$gray-900: #111827;
+$white: #ffffff;
+
+// 믹스인
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin button-base {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+@mixin shadow-sm {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+// 전역 스타일
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f5f5f5;
+}
+
+// 메인 컨테이너
+.appContainer {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: $white;
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+// 헤더
+.header {
+  background-color: $white;
+  padding: 12px 16px;
+  @include flex-between;
+  border-bottom: 1px solid $gray-200;
+
+  &__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: $gray-900;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    color: $gray-500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $gray-600;
+    }
+  }
+}
+
+// 콘텐츠 영역
+.content {
+  padding: 16px;
+  position: relative;
+}
+
+// 타임라인
+.timeline {
+  position: relative;
+
+  &__line {
+    position: absolute;
+    left: 80px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: $gray-300;
+  }
+}
+
+// 범례
+.legend {
+  margin-bottom: 16px;
+  padding: 12px;
+  background-color: $gray-100;
+  border-radius: 8px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+
+    &--orange {
+      background-color: $orange-500;
+    }
+
+    &--green {
+      background-color: $green-500;
+    }
+
+    &--blue {
+      background-color: $blue-500;
+    }
+  }
+}
+
+// 시간 슬롯
+.timeSlot {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 8px;
+
+  &__time {
+    margin-right: 16px;
+    width: 64px;
+    text-align: right;
+
+    &--major {
+      font-weight: 500;
+      color: $gray-900;
+      font-size: 14px;
+    }
+
+    &--minor {
+      color: $gray-500;
+      font-size: 12px;
+    }
+  }
+
+  &__dot {
+    position: relative;
+    margin-right: 16px;
+
+    &Circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      position: relative;
+      z-index: 10;
+
+      &--hasBus {
+        background-color: $primary-blue;
+      }
+
+      &--major {
+        background-color: $gray-400;
+      }
+
+      &--minor {
+        background-color: $gray-300;
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+    padding: 4px 0;
+  }
+}
+
+// 버스 관련 스타일
+.bus {
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__arrow {
+    margin: 0 4px;
+    color: $gray-400;
+    font-size: 12px;
+  }
+
+  &__count {
+    margin-top: 4px;
+    font-size: 12px;
+    color: $gray-500;
+  }
+}
+
+// 버스 아이콘
+.busIcon {
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: $white;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  @include shadow-sm;
+
+  &--orange {
+    background-color: $orange-500;
+  }
+
+  &--green {
+    background-color: $green-500;
+  }
+
+  &--blue {
+    background-color: $blue-500;
+  }
+
+  &__svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+// 현재 시간 표시기
+.currentTime {
+  position: absolute;
+  left: 64px;
+  top: 128px;
+  display: flex;
+  align-items: center;
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    background-color: $red-500;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  &__label {
+    margin-left: 8px;
+    font-size: 12px;
+    color: $red-500;
+    font-weight: 500;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// 하단 섹션
+.bottomSection {
+  padding: 12px 16px;
+  border-top: 1px solid $gray-200;
+  background-color: $gray-100;
+
+  &__container {
+    @include flex-between;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__appIcon {
+    width: 16px;
+    height: 16px;
+    background-color: $primary-blue;
+    border-radius: 2px;
+  }
+
+  &__appName {
+    font-size: 14px;
+    color: $gray-500;
+  }
+
+  &__status {
+    font-size: 12px;
+    color: $gray-500;
+  }
+
+  &__refresh {
+    width: 16px;
+    height: 16px;
+    color: $gray-400;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $gray-500;
+    }
+  }
+}
+
+// 하단 버튼
+.bottomButton {
+  padding: 0 16px 24px;
+
+  button {
+    width: 100%;
+    background-color: $primary-blue;
+    color: $white;
+    padding: 12px;
+    font-size: 16px;
+    @include button-base;
+
+    &:hover {
+      background-color: #1d4ed8;
+    }
+
+    &:active {
+      background-color: #1e40af;
+    }
+  }
+}
+
+// 시간 슬롯 컨테이너
+.timeSlots {
+  > * + * {
+    margin-top: 8px;
+  }
+}
