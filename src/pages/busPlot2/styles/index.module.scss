@@ -1,10 +1,13 @@
 // BusRoute.module.scss
 // 변수 정의
 $primary-blue: #2563eb;
-$blue-500: #2499f2;
+$blue-500: #269cf7;
 $orange-500: #f97316;
 $green-500: #22c55e;
-$red-500: #ef4444;
+$red-500: #c83b3b;
+$purple-500: #c27dff;
+$skyblue-500: #87e3ff;
+$mint-500: #15ecb9;
 $gray-100: #f3f4f6;
 $gray-200: #e5e7eb;
 $gray-300: #d1d5db;
@@ -103,7 +106,7 @@ body {
 
   &__line {
     position: absolute;
-    left: 80px;
+    left: 83px;
     top: 0;
     bottom: 0;
     width: 2px;
@@ -136,15 +139,15 @@ body {
     height: 12px;
     border-radius: 2px;
 
-    &--orange {
+    &--1 {
       background-color: $orange-500;
     }
 
-    &--green {
+    &--2 {
       background-color: $green-500;
     }
 
-    &--blue {
+    &--3 {
       background-color: $blue-500;
     }
   }
@@ -219,11 +222,11 @@ body {
     align-items: center;
   }
 
-  &__arrow {
-    margin: 0 4px;
-    color: $gray-400;
-    font-size: 12px;
-  }
+  // &__arrow {
+  //   margin: 0 4px;
+  //   color: $gray-400;
+  //   font-size: 12px;
+  // }
 
   &__count {
     margin-top: 4px;
@@ -236,7 +239,7 @@ body {
 .busIcon {
   border-radius: 8px;
   padding: 4px 8px;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
   color: $white;
   display: flex;
@@ -244,16 +247,41 @@ body {
   gap: 4px;
   @include shadow-sm;
 
-  &--orange {
+  &--1 {
     background-color: $orange-500;
   }
 
-  &--green {
+  &--2 {
     background-color: $green-500;
   }
 
-  &--blue {
+  &--3 {
     background-color: $blue-500;
+  }
+
+  &--4 {
+    background-color: $red-500;
+  }
+  &--5 {
+    background-color: $purple-500;
+  }
+  &--6 {
+    background-color: $skyblue-500;
+  }
+  &--7 {
+    background-color: $mint-500;
+  }
+
+  &--8 {
+    background-color: $gray-300;
+  }
+
+  &--9 {
+    background-color: $gray-400;
+  }
+
+  &--10 {
+    background-color: $gray-500;
   }
 
   &__svg {

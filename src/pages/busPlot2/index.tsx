@@ -5,7 +5,7 @@ import styles from "./styles/index.module.scss";
 interface BusArrival {
   time: string;
   busNumber: string;
-  type: "orange" | "green" | "blue";
+  type: number;
   direction: string;
 }
 
@@ -14,7 +14,7 @@ interface GroupedBusArrivals {
 }
 
 interface BusIconProps {
-  type: "orange" | "green" | "blue";
+  type: number;
   busNumber: string;
   direction: string;
 }
@@ -42,40 +42,40 @@ const BusRouteApp: React.FC = () => {
 
   // 버스 도착 데이터
   const busArrivals: BusArrival[] = [
-    { time: "06:15", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "06:45", busNumber: "187", type: "green", direction: "성수" },
-    { time: "06:45", busNumber: "181", type: "blue", direction: "내선순환" },
-    { time: "07:20", busNumber: "181", type: "blue", direction: "성수" },
-    { time: "07:55", busNumber: "187", type: "green", direction: "성수" },
-    { time: "07:55", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "07:55", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "08:30", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "08:30", busNumber: "187", type: "green", direction: "성수" },
-    { time: "09:10", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "09:45", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "10:25", busNumber: "187", type: "green", direction: "성수" },
-    { time: "11:00", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "11:00", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "11:35", busNumber: "187", type: "orange", direction: "성수" },
-    { time: "12:15", busNumber: "187", type: "green", direction: "성수" },
-    { time: "12:15", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "12:15", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "13:00", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "13:40", busNumber: "181", type: "blue", direction: "성수" },
-    { time: "14:20", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "15:05", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "16:30", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "16:30", busNumber: "187", type: "green", direction: "성수" },
-    { time: "17:15", busNumber: "187", type: "green", direction: "성수" },
-    { time: "18:00", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "18:00", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "18:00", busNumber: "187", type: "orange", direction: "성수" },
-    { time: "19:25", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "20:45", busNumber: "187", type: "orange", direction: "성수" },
-    { time: "21:30", busNumber: "181", type: "blue", direction: "외선순환" },
-    { time: "22:15", busNumber: "180", type: "orange", direction: "내선순환" },
-    { time: "23:00", busNumber: "187", type: "green", direction: "성수" },
-    { time: "23:45", busNumber: "180", type: "orange", direction: "내선순환" },
+    { time: "06:15", busNumber: "180", type: 1, direction: "내선순환" },
+    { time: "06:45", busNumber: "187", type: 2, direction: "성수" },
+    { time: "06:45", busNumber: "181", type: 3, direction: "내선순환" },
+    { time: "07:20", busNumber: "181", type: 3, direction: "성수" },
+    { time: "07:55", busNumber: "187", type: 2, direction: "성수" },
+    { time: "07:55", busNumber: "180", type: 1, direction: "내선순환" },
+    { time: "07:55", busNumber: "181", type: 4, direction: "외선순환" },
+    { time: "08:30", busNumber: "180", type: 5, direction: "내선순환" },
+    { time: "08:30", busNumber: "187", type: 6, direction: "성수" },
+    { time: "09:10", busNumber: "180", type: 7, direction: "내선순환" },
+    { time: "09:45", busNumber: "181", type: 8, direction: "외선순환" },
+    { time: "10:25", busNumber: "187", type: 9, direction: "성수" },
+    { time: "11:00", busNumber: "181", type: 10, direction: "외선순환" },
+    { time: "11:00", busNumber: "180", type: 1, direction: "내선순환" },
+    { time: "11:35", busNumber: "187", type: 1, direction: "성수" },
+    { time: "12:15", busNumber: "187", type: 2, direction: "성수" },
+    { time: "12:15", busNumber: "180", type: 1, direction: "내선순환" },
+    { time: "12:15", busNumber: "181", type: 3, direction: "외선순환" },
+    { time: "13:00", busNumber: "180", type: 1, direction: "내선순환" },
+    { time: "13:40", busNumber: "181", type: 3, direction: "성수" },
+    { time: "14:20", busNumber: "181", type: 3, direction: "외선순환" },
+    { time: "15:05", busNumber: "181", type: 3, direction: "외선순환" },
+    { time: "16:30", busNumber: "180", type: 1, direction: "내선순환" },
+    { time: "16:30", busNumber: "187", type: 2, direction: "성수" },
+    { time: "17:15", busNumber: "187", type: 2, direction: "성수" },
+    { time: "18:00", busNumber: "180", type: 1, direction: "내선순환" },
+    { time: "18:00", busNumber: "181", type: 3, direction: "외선순환" },
+    { time: "18:00", busNumber: "187", type: 1, direction: "성수" },
+    { time: "19:25", busNumber: "181", type: 3, direction: "외선순환" },
+    { time: "20:45", busNumber: "187", type: 1, direction: "성수" },
+    { time: "21:30", busNumber: "181", type: 3, direction: "외선순환" },
+    { time: "22:15", busNumber: "180", type: 1, direction: "내선순환" },
+    { time: "23:00", busNumber: "187", type: 2, direction: "성수" },
+    { time: "23:45", busNumber: "180", type: 1, direction: "내선순환" },
   ];
 
   const timeSlots: string[] = generateTimeSlots();
@@ -103,19 +103,6 @@ const BusRouteApp: React.FC = () => {
   const BusIcon: React.FC<BusIconProps> = ({ type, busNumber }) => {
     return (
       <div className={`${styles.busIcon} ${styles[`busIcon--${type}`]}`}>
-        <svg
-          className={styles.busIcon__svg}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2v0a2 2 0 01-2 2H8a2 2 0 01-2-2v0a2 2 0 01-2-2V9a2 2 0 012-2h2.586a1 1 0 00.707-.293L8 7z"
-          />
-        </svg>
         <span>{busNumber}</span>
       </div>
     );
@@ -127,13 +114,6 @@ const BusRouteApp: React.FC = () => {
 
     return (
       <div className={styles.timeSlot}>
-        {/* <div
-          className={`${styles.timeSlot__time} ${
-            isMajorTime
-              ? styles["timeSlot__time--major"]
-              : styles["timeSlot__time--minor"]
-          }`}
-        > */}
         <div
           className={`${styles.timeSlot__time} ${styles["timeSlot__time--minor"]}`}
         >
@@ -166,15 +146,9 @@ const BusRouteApp: React.FC = () => {
                       busNumber={bus.busNumber}
                       direction={bus.direction}
                     />
-                    {/* {index < busDataList.length - 1 && (
-                      <div className={styles.bus__arrow}></div>
-                    )} */}
                   </div>
                 ))}
               </div>
-              {/* <div className={styles.bus__count}>
-                {busDataList.length}대 동시 도착
-              </div> */}
             </>
           )}
         </div>
@@ -226,19 +200,19 @@ const BusRouteApp: React.FC = () => {
             <div className={styles.legend__container}>
               <div className={styles.legend__item}>
                 <div
-                  className={`${styles.legend__color} ${styles["legend__color--orange"]}`}
+                  className={`${styles.legend__color} ${styles["legend__color--1"]}`}
                 ></div>
                 <span>180</span>
               </div>
               <div className={styles.legend__item}>
                 <div
-                  className={`${styles.legend__color} ${styles["legend__color--green"]}`}
+                  className={`${styles.legend__color} ${styles["legend__color--2"]}`}
                 ></div>
                 <span>187</span>
               </div>
               <div className={styles.legend__item}>
                 <div
-                  className={`${styles.legend__color} ${styles["legend__color--blue"]}`}
+                  className={`${styles.legend__color} ${styles["legend__color--3"]}`}
                 ></div>
                 <span>181</span>
               </div>
@@ -255,12 +229,6 @@ const BusRouteApp: React.FC = () => {
               );
             })}
           </div>
-
-          {/* Current time indicator */}
-          {/* <div className={styles.currentTime}>
-            <div className={styles.currentTime__dot}></div>
-            <div className={styles.currentTime__label}>현재 시간</div>
-          </div> */}
         </div>
       </div>
 
