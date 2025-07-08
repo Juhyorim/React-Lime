@@ -54,7 +54,7 @@ function App() {
             element={<ChartPage />}
           ></Route>
           <Route
-            path="/chart2/:cityCode/:nodeId/:routeId"
+            path="/chart2/:cityCode/:nodeId"
             element={<ChartPage2 />}
           ></Route>
           <Route path="/tico/search" element={<TicoSearchPage />} />

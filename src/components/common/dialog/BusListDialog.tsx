@@ -10,12 +10,13 @@ interface Props {
   nodeId: string;
 }
 
-interface BusRoute {
+export interface BusRoute {
   routeId: string;
   routeNo: string;
   routEtp: string;
   endNodeName: string;
   startNodeName: string;
+  type: number | null;
 }
 
 function BusListDialog({ handleDialog, cityCode, nodeId }: Props) {
