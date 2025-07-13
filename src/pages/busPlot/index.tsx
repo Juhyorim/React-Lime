@@ -55,6 +55,7 @@ const PriorityChart: React.FC = () => {
   const [data, setData] = useState<ProcessedDataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [todayCash, setTodayCash] = useState<string>("");
 
   // 드롭다운 날짜 데이터 useMemo로 처리 - 다시 생성 방지
   const { dateOptions, yesterdayFormatted } = useMemo(() => {
@@ -63,6 +64,9 @@ const PriorityChart: React.FC = () => {
     });
 
     const today = new Date();
+    const todayDate = new Date(today.getTime());
+    setTodayCash(formatter.format(todayDate));
+
     const options = Array.from({ length: 15 }, (_, i) => {
       const date = new Date(today.getTime());
       date.setDate(today.getDate() - i);
@@ -148,6 +152,14 @@ const PriorityChart: React.FC = () => {
       routeId: routeId,
       localDate: selectedFruit,
     };
+
+    if (todayCash === selectedFruit) {
+      const response = await ticoAxios.get(`/subscribe/busInfo/version5`, {
+        params: queryParams,
+      });
+
+      return response.data.response;
+    }
 
     const response = await ticoAxios.get(`/subscribe/busInfo/version3`, {
       params: queryParams,

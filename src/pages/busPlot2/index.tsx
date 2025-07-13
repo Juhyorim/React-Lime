@@ -20,6 +20,7 @@ interface ApiBusData {
 interface BusArrival {
   time: string;
   busNumber: string;
+  busDirName: string;
   type: number;
 }
 
@@ -28,9 +29,8 @@ interface GroupedBusArrivals {
 }
 
 interface BusIconProps {
-  // type: number;
   busNumber: string;
-  // direction: string;
+  busDirName: string;
 }
 
 interface TimeSlotProps {
@@ -61,15 +61,6 @@ const BusRouteApp: React.FC = () => {
       .padStart(2, "0")}`;
   };
 
-  // API 데이터를 내부 형식으로 변환
-  const transformApiData = (apiData: ApiBusData[]): BusArrival[] => {
-    return apiData.map((item, index) => ({
-      time: formatTime(item.arriveTime),
-      busNumber: item.routeNo,
-      type: index + 1,
-    }));
-  };
-
   // 드롭다운 날짜 데이터 useMemo로 처리 - 다시 생성 방지
   const { dateOptions, yesterdayFormatted } = useMemo(() => {
     const formatter = new Intl.DateTimeFormat("sv-SE", {
@@ -96,7 +87,7 @@ const BusRouteApp: React.FC = () => {
     };
   }, []);
 
-  const [selectedFruit, setSelectedFruit] = useState(yesterdayFormatted);
+  const [selectedDate, setSelectedDate] = useState(yesterdayFormatted);
   const [fruitOptions, _] = useState<DropdownOption[]>(dateOptions);
 
   const [routeColorMap, setRouteColorMap] = useState<Map<string, number>>(
@@ -127,22 +118,32 @@ const BusRouteApp: React.FC = () => {
             type: ((index + 1) % 17) + 1,
           }));
 
-        for (const tmp of sortedBusStations) {
-          setRouteColorMap((prev) => new Map(prev).set(tmp.routeNo, tmp.type!));
-        }
+        const newRouteColorMap = new Map();
+        const newDirMap = new Map();
 
+        sortedBusStations.forEach((route) => {
+          newRouteColorMap.set(route.routeNo, route.type!);
+          newDirMap.set(route.routeId, route.endNodeName);
+        });
+
+        setRouteColorMap(newRouteColorMap);
         setBusRoutes(sortedBusStations);
+
+        return newDirMap;
       } catch (error) {
         console.error("버스 정보 불러오기 실패:", error);
+        setError("버스 정보를 불러오는데 실패했습니다.");
+
+        return null;
       }
     };
 
-    const fetchBusData = async () => {
+    const fetchBusData = async (currentDirMap?: Map<string, string>) => {
       try {
         const queryParams = {
           cityCode: cityCode,
           nodeId: nodeId,
-          localDate: selectedFruit,
+          localDate: selectedDate,
         };
 
         const response = await ticoAxios.get(`/subscribe/busInfo/version4`, {
@@ -150,7 +151,13 @@ const BusRouteApp: React.FC = () => {
         });
 
         const apiData: ApiBusData[] = response.data.response;
-        const transformedData = transformApiData(apiData);
+        const transformedData = apiData.map((item, index) => ({
+          time: formatTime(item.arriveTime),
+          busNumber: item.routeNo,
+          busDirName: `${currentDirMap?.get(item.routeId)} 방면`,
+          type: index + 1,
+        }));
+
         setBusArrivals(transformedData);
       } catch (err) {
         setError(
@@ -162,22 +169,16 @@ const BusRouteApp: React.FC = () => {
       }
     };
 
-    fetchBusRouteData();
-    fetchBusData();
-  }, [selectedFruit]); // 빈 배열은 컴포넌트가 마운트될 때만 실행됨을 의미
+    // 순차적으로 데이터 로드 (dirMap 설정 후 버스 도착 정보 가져오기)
+    const loadData = async () => {
+      const newDirMap = await fetchBusRouteData();
+      if (newDirMap) {
+        await fetchBusData(newDirMap);
+      }
+    };
 
-  // API 호출 함수
-  const fetchBusData = async () => {};
-
-  // 컴포넌트 마운트 시 데이터 로드
-  useEffect(() => {
-    fetchBusData();
-
-    // 30초마다 데이터 갱신 (선택적)
-    const interval = setInterval(fetchBusData, 30000);
-
-    return () => clearInterval(interval);
-  }, []);
+    loadData();
+  }, [selectedDate]);
 
   // 6:00부터 24:00까지의 시간대 생성
   const generateTimeSlots = (): string[] => {
@@ -216,14 +217,16 @@ const BusRouteApp: React.FC = () => {
     ]),
   ].sort();
 
-  const BusIcon: React.FC<BusIconProps> = ({ busNumber }) => {
+  const BusIcon: React.FC<BusIconProps> = ({ busNumber, busDirName }) => {
     return (
       <div
         className={`${styles.busIcon} ${
           styles[`busIcon--${routeColorMap.get(busNumber)}`]
         }`}
       >
-        <span>{busNumber}</span>
+        <span>
+          {busNumber} ({busDirName})
+        </span>
       </div>
     );
   };
@@ -262,9 +265,8 @@ const BusRouteApp: React.FC = () => {
                     className={styles.bus__item}
                   >
                     <BusIcon
-                      // type={bus.type}
                       busNumber={bus.busNumber}
-                      // direction={bus.direction}
+                      busDirName={bus.busDirName}
                       key={bus.time}
                     />
                   </div>
@@ -294,9 +296,7 @@ const BusRouteApp: React.FC = () => {
       <div className={styles.appContainer}>
         <div className={styles.errorContainer}>
           <div className={styles.error}>{error}</div>
-          <button onClick={fetchBusData} className={styles.retryButton}>
-            다시 시도
-          </button>
+          <button className={styles.retryButton}>다시 시도</button>
         </div>
       </div>
     );
@@ -333,7 +333,7 @@ const BusRouteApp: React.FC = () => {
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          onClick={fetchBusData} // 새로고침 기능
+          // onClick={fetchBusData} // 새로고침 기능
           style={{ cursor: "pointer" }}
         >
           <path
@@ -350,8 +350,8 @@ const BusRouteApp: React.FC = () => {
         <DateDropdown
           options={fruitOptions}
           placeholder="날짜 선택"
-          value={selectedFruit}
-          onChange={setSelectedFruit}
+          value={selectedDate}
+          onChange={setSelectedDate}
         />
         <div className={styles.timeline}>
           {/* Main vertical timeline */}
@@ -368,7 +368,9 @@ const BusRouteApp: React.FC = () => {
                         styles[`legend__color--${item.type}`]
                       }`}
                     ></div>
-                    <span>{item.routeNo}</span>
+                    <span>
+                      {item.routeNo}({item.endNodeName})
+                    </span>
                   </div>
                 );
               })}
@@ -387,41 +389,6 @@ const BusRouteApp: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Bottom Section */}
-      {/* <div className={styles.bottomSection}>
-        <div className={styles.bottomSection__container}>
-          <div className={styles.bottomSection__left}>
-            <div className={styles.bottomSection__appIcon}></div>
-            <span className={styles.bottomSection__appName}>
-              버스 도착 알림
-            </span>
-            <span className={styles.bottomSection__status}>설치됨</span>
-          </div>
-          <div>
-            <svg
-              className={styles.bottomSection__refresh}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              onClick={fetchBusData}
-              style={{ cursor: "pointer" }}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              />
-            </svg>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Bottom Button
-      <div className={styles.bottomButton}>
-        <button>알림 설정</button>
-      </div> */}
     </div>
   );
 };

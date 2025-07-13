@@ -126,6 +126,9 @@ function BusListDialog({ handleDialog, cityCode, nodeId }: Props) {
                     className={styles.bus_icon}
                   /> */}
                   <div className={styles.bus_num}>{item.routeNo}</div>
+                  <div className={styles.bus_dir}>
+                    ({item.endNodeName} 방면)
+                  </div>
                 </div>
               );
             })}

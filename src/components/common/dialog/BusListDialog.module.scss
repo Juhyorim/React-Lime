@@ -218,6 +218,11 @@ $blue-active: #608fbf;
     font-size: 20px;
   }
 
+  &_dir {
+    // width: 100%;
+    font-size: 12px;
+  }
+
   &_total {
     color: rgb(0, 0, 0);
     font-weight: 600;
